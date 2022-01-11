@@ -1,6 +1,7 @@
 <?php
 
-use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\LoginController;
+use App\Http\Controllers\Api\RegisterController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -19,6 +20,11 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
-Route::post('login', [AuthController::class, 'login']);
+Route::post('/login', [LoginController::class, 'login']);
 
-Route::post('register', [AuthController::class, 'register']);
+Route::post('/register', [RegisterController::class, 'register']);
+
+
+Route::get('/user', function(Request $request) {
+    return Auth::user();
+})->middleware('auth:api');
