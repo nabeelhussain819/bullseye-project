@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Helpers\Common;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
@@ -12,7 +13,9 @@ use App\Models\User;
 class AuthController extends Controller
 {
     //
-
+     /**
+     * Registered
+     */
     public function register(Request $request)
     {
         $request->validate([
@@ -30,7 +33,7 @@ class AuthController extends Controller
         $success['name'] =  $user->name;
 
  
-        return $this->sendResponse($success, 'User register successfully.');
+        return Common::sendResponse($success, 'User register successfully.');
     }
  
     /**
@@ -50,7 +53,7 @@ class AuthController extends Controller
             return $this->sendResponse($success, 'User logged in successfully.');
 
         } else {
-            return $this->sendError('Unauthorised.', ['error'=>'Unauthorised']);
+            return Common::sendError('Unauthorised.', ['error'=>'Unauthorised']);
         }
     }   
 

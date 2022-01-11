@@ -33,6 +33,7 @@ class User extends Authenticatable
         'chief_earner_qualification',
         'chief_earner_occupation',
         'chief_earner_designation',
+        'otp_verified'
     ];
 
     /**
@@ -52,5 +53,19 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'otp_verified_at' => 'datetime'
     ];
+
+    public function otp()
+    {
+        return $this->hasOne(Otp::class, 'user_id');
+    }
+
+    public function generateOtp($user, $otpType = Otp::REGISTRATION_OTP)
+    {
+        $otpPin = Otp::createPin();
+        $user->otp()->delete();
+        Otp::createOtp($user, $otpType, $otpPin);
+    }
+
 }

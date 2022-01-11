@@ -39,6 +39,35 @@
                             </div>
                         </div>
 
+                        
+                        <div class="row mb-3">
+                            <label for="text" class="col-md-4 col-form-label text-md-end">{{ __('Cell Number') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="text" type="number" class="form-control @error('cell_number_primary') is-invalid @enderror" name="email" value="{{ old('cell_number_primary') }}" required>
+
+                                @error('cell_number_primary')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label for="text" class="col-md-4 col-form-label text-md-end">{{ __('Cell Number Secondary') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="text" type="number" class="form-control @error('cell_number_secondary') is-invalid @enderror" name="email" value="{{ old('cell_number_secondary') }}" required>
+
+                                @error('cell_number_secondary')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
                         <div class="row mb-3">
                             <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
 

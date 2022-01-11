@@ -30,7 +30,9 @@ class CreateUsersTable extends Migration
             $table->string('chief_earner_qualification')->nullable();
             $table->string('chief_earner_occupation')->nullable();
             $table->string('chief_earner_designation')->nullable();
+            $table->boolean('otp_verified')->default(false);
             $table->timestamp('email_verified_at')->nullable();
+            $table->timestamp('phone_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
