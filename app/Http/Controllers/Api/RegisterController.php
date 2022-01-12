@@ -32,7 +32,8 @@ class RegisterController extends Controller
     
         $success['token'] =  $user->createToken('token')->accessToken;
         $success['name'] =  $user->name;
-
+        $success['otp_message'] = "An Otp has been generated.";
+        $success['otp_pin'] = $otpPin;
  
         return Common::sendResponse($success, 'User register successfully.');
     }

@@ -19,22 +19,25 @@ class LoginController extends Controller
         {
             return Common::sendError('Please fill the required fields.', $validate->errors());
         }
-        
-        if(\Auth::attempt(['email' => $request->email, 'password' => $request->password])){ 
+
+
+        if(\Auth::attempt(['cell_number_primary' => $request->cell_number_primary, 'password' => $request->password, 'otp_verified' => true])){ 
             $user = \Auth::user(); 
             $success['token'] =  $user->createToken('token')->accessToken; 
             $success['name'] =  $user->name;
             return Common::sendResponse($success, 'User logged in successfully.');
-
-        } else {
-            return Common::sendError('Your login credentials are incorrect', ['error'=>'Unauthorised']);
         }
+        else
+        {
+            return Common::sendError('Your login credentials are incorrect', ['error'=>'Unauthorised', 'otp' => 'Otp is not verified']);
+        }
+       
     }
 
     protected function validator(array $data)
     {
         return Validator::make($data,[
-            'email' => 'required',
+            'cell_number_primary' => 'required',
             'password' => 'required'
         ]);
     }

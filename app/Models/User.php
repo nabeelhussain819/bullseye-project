@@ -12,6 +12,10 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    public const VERIFIED = 1;
+    public const NOT_VERIFIED = 0;
+
+
     /**
      * The attributes that are mass assignable.
      *
@@ -61,11 +65,16 @@ class User extends Authenticatable
         return $this->hasOne(Otp::class, 'user_id');
     }
 
-    public function generateOtp($user, $otpType = Otp::REGISTRATION_OTP)
+    static function generateOtp($user, $otpType = Otp::REGISTRATION_OTP)
     {
         $otpPin = Otp::createPin();
         $user->otp()->delete();
         Otp::createOtp($user, $otpType, $otpPin);
     }
 
+
+    public function scopeVerified($query)
+    {
+        $query->where('otp_verified', self::VERIFIED);
+    }
 }

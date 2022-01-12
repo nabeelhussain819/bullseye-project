@@ -13,8 +13,14 @@ class Otp extends Model
     public const FORGET_OTP = 1;
 
     protected $fillable = [
-        'user_id', 'otp', 'type_id'
+        'user_id', 'otp', 'type_id','used_at'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
 
     /**
      * @param int $digits
