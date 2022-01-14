@@ -20,6 +20,7 @@ export default function Page({ dispatch }) {
   return <div className="container mt-4">
         <div className="card">
             <Search />
+            <br></br>
             <div className="card-body">
               <Main/>
             </div>
