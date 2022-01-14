@@ -8,23 +8,25 @@ import NavItem from './NavItem'
 
 // initiate Component
 export default function PrivateHeader({user, showNavigation, showDropdown, toggleDropdown, logout}) {
+
+  const caretRed = {
+    color:'black'
+  }
+
   return (
     <Collapse className="navbar-collapse" isOpen={ showNavigation }>
-      <ul className="navbar-nav mr-auto">
-        <NavItem path="/">Home</NavItem>
-        <NavItem path="/articles">Articles</NavItem>
+      <ul className="navbar-nav mr-auto ">
       </ul>
 
-      <ul className="navbar-nav">
+      <ul className="navbar-nav bg">
         <Dropdown isOpen={ showDropdown } toggle={ toggleDropdown }>
-          <DropdownToggle nav caret>
+          <DropdownToggle nav caret style={caretRed}>
             { user.name }
           </DropdownToggle>
           <DropdownMenu className="dropdown-menu-right">
-            <Link className='dropdown-item' to={ `/users/${ user.id }/edit` }>
+            {/* <Link className='dropdown-item' to={ `/users/${ user.id }/edit` }>
               <span className="fa fa-user-o" title="logout" aria-hidden="true"/> Profile
-            </Link>
-            <DropdownItem divider/>
+            </Link> */}
             <DropdownItem onClick={ e => logout(e) }>
               <span className="fa fa-sign-out" title="logout" aria-hidden="true"/> Logout
             </DropdownItem>
