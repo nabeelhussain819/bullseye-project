@@ -6,6 +6,7 @@ import _ from 'lodash'
 import { Redirect } from 'react-router-dom'
 import { login } from '../../service'
 import { Validator } from 'ree-validate'
+import './Login.module.css';
 
 // import components
 import Form from './components/Form'
@@ -115,8 +116,16 @@ class Page extends Component {
 
     return (<div className="container py-5">
       <div className="row">
-        <div className="col-md-12">
-          <div className="row">
+        <div className='col-md-6'>
+          <div className="mx-auto">
+            <div className='card'>
+              <div className='card-body'>
+                <img src="https://www.unfe.org/wp-content/uploads/2019/04/SM-placeholder.png" alt="displayimage"/>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="col-md-6">
             <div className="mx-auto">
               <span className="anchor"/>
               <div className="card has-shadow">
@@ -125,7 +134,6 @@ class Page extends Component {
                 </div>
               </div>
             </div>
-          </div>
         </div>
       </div>
     </div>)

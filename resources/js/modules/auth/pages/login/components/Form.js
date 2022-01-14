@@ -14,7 +14,7 @@ const propTypes = {
 
 const Form = ({ email, password, remember, errors, handleChange, handleSubmit }) => (
   <form className="form" role="form" onSubmit={handleSubmit} noValidate>
-    <h2 className="card-title">Please sign in</h2>
+    <h2 className="card-title">Login</h2>
     <div className="form-group">
       <label htmlFor="email" className="sr-only">Email</label>
       <input type="text"
