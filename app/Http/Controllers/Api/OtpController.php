@@ -26,12 +26,15 @@ class OtpController extends Controller
         {
             $userWithOtp->update(['used_at' => Carbon::now()]);
             
-            User::find($userWithOtp->user_id)->update([
+            $user = User::find($userWithOtp->user_id);
+            
+            $user->update([
                 'otp_verified' => true
             ]);
 
             $data['message'] = 'Your Otp has been verified. You can now login';
-
+            $data['token'] = $user->createToken('token')->accessToken;
+            
             return Common::sendResponse($data, 'Otp Verification Successfull');
         }
 
