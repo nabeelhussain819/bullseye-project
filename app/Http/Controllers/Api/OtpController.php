@@ -16,17 +16,25 @@ class OtpController extends Controller
     public function verification(Request $request)
     {
 
-        $userWithOtp = Otp::where('otp', $request->get('otp'))->whereNull('used_at')->first();
+        $userWithOtp = Otp::with('user')->where('otp', $request->get('otp'))
+        ->whereHas('user', function($query) use($request){
+            $query->where('cell_number_primary', $request->get('cell_number_primary'));
+        })->whereNull('used_at')
+        ->first();
+
         if(!empty($userWithOtp))
         {
             $userWithOtp->update(['used_at' => Carbon::now()]);
             
-            User::find($userWithOtp->user_id)->update([
+            $user = User::find($userWithOtp->user_id);
+            
+            $user->update([
                 'otp_verified' => true
             ]);
 
             $data['message'] = 'Your Otp has been verified. You can now login';
-
+            $data['token'] = $user->createToken('token')->accessToken;
+            
             return Common::sendResponse($data, 'Otp Verification Successfull');
         }
 

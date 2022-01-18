@@ -23,7 +23,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('/login', [LoginController::class, 'login']);
 
-Route::post('/register', [RegisterController::class, 'register']);
+Route::post('/signup', [RegisterController::class, 'register']);
 
 Route::post('/otp-verification',[OtpController::class, 'verification']);
 
