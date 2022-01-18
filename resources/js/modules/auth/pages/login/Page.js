@@ -7,6 +7,7 @@ import { Redirect } from 'react-router-dom'
 import { login } from '../../service'
 import { Validator } from 'ree-validate'
 
+
 // import components
 import Form from './components/Form'
 
@@ -20,6 +21,8 @@ class Page extends Component {
     isAuthenticated: PropTypes.bool.isRequired,
     dispatch: PropTypes.func.isRequired
   }
+
+  //mystyles
 
   constructor(props) {
     super(props)
@@ -100,6 +103,7 @@ class Page extends Component {
   // render component
   render() {
 
+  
     // check if user is authenticated then redirect him to home page
     if (this.props.isAuthenticated) {
       return <Redirect to="/" />
@@ -114,22 +118,16 @@ class Page extends Component {
     }
 
     return (<div className="container py-5">
-      <div className="row">
-        <div className="col-md-12">
-          <div className="row">
-            <div className="mx-auto">
-              <span className="anchor"/>
-              <div className="card has-shadow">
-                <div className="card-body">
+      <div className="register-photo">
+       <div className="form-container">
+          <div className="image-holder"></div>
                   <Form {...props} />
-                </div>
-              </div>
-            </div>
           </div>
-        </div>
       </div>
     </div>)
   }
 }
+
+
 
 export default Page

@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\LoginController;
 use App\Http\Controllers\Api\OtpController;
 use App\Http\Controllers\Api\RegisterController;
+use App\Http\Controllers\SurveyController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -27,6 +28,11 @@ Route::post('/signup', [RegisterController::class, 'register']);
 
 Route::post('/otp-verification',[OtpController::class, 'verification']);
 
+
+Route::group(['prefix' => 'survey'], function(){
+
+    Route::post('/create',[SurveyController::class, 'store']);
+});
 
 Route::get('/user', function(Request $request) {
     return Auth::user();

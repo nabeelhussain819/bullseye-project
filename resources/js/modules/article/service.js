@@ -13,7 +13,8 @@ function transformResponse(params) {
 export function articleAddRequest(params) {
   return dispatch => (
     new Promise((resolve, reject) => {
-      Http.post('api/v1/articles', transformRequest(params))
+      console.log(params);
+      Http.post('api/survey/create', transformRequest(params))
         .then(res => {
           dispatch(articleActions.add(transformResponse(res.data)))
           return resolve()

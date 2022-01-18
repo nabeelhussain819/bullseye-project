@@ -14,7 +14,7 @@ const propTypes = {
 
 const Form = ({ email, password, remember, errors, handleChange, handleSubmit }) => (
   <form className="form" role="form" onSubmit={handleSubmit} noValidate>
-    <h2 className="card-title">Please sign in</h2>
+    <h2 className="card-title">Login</h2>
     <div className="form-group">
       <label htmlFor="email" className="sr-only">Email</label>
       <input type="text"
@@ -40,20 +40,10 @@ const Form = ({ email, password, remember, errors, handleChange, handleSubmit })
              required/>
       {errors.has('password') && <div className="invalid-feedback">{errors.first('password')}</div>}
     </div>
-    <div>
-      <label className="custom-control custom-checkbox">
-        <input type="checkbox"
-               name="remember"
-               className="custom-control-input"
-               onChange={e => handleChange(e.target.name, !remember)}/>
-        <span className="custom-control-indicator" />
-        <span className="custom-control-description small">Remember me on this computer</span>
-      </label>
-    </div>
+   
     <button className="btn btn-lg btn-primary btn-block"
             type="submit"
             disabled={errors.any()}>Sign In</button>
-    <p>Not a member? <Link to='/register'>Signup here</Link></p>
   </form>
 )
 
