@@ -1,12 +1,12 @@
 // import libs
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
-import moment from 'moment'
-// import {articleListRequest, articleUpdateRequest, articleRemoveRequest} from '../../service'
 
-// import components
+//import UserService from '~/services/API/UserService'
 
 import {Link} from 'react-router-dom'
+
+import UserService from "../../../../services/API/UsersService";
 
 class Page extends Component {
     static displayName = 'ArticlesPage'
@@ -23,6 +23,10 @@ class Page extends Component {
     componentDidMount() {
         const {dispatch} = this.props
 
+        //fetching API response @armash
+        UserService.all().then(response => {
+            console.log(response)
+        })
         // dispatch(articleListRequest({}))
     }
 
