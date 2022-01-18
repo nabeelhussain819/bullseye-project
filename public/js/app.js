@@ -2493,6 +2493,9 @@ function PrivateHeader(_ref) {
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_NavItem__WEBPACK_IMPORTED_MODULE_1__["default"], {
         path: "/articles",
         children: "Articles"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_NavItem__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        path: "/consumers",
+        children: "Users"
       })]
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("ul", {
       className: "navbar-nav",
@@ -3587,6 +3590,28 @@ var getAuth = function getAuth(state) {
 
 /***/ }),
 
+/***/ "./resources/js/modules/consumers/route.js":
+/*!*************************************************!*\
+  !*** ./resources/js/modules/consumers/route.js ***!
+  \*************************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+// import lib
+
+/* harmony default export */ __webpack_exports__["default"] = ([{
+  path: '/consumers',
+  exact: true,
+  auth: true,
+  component: /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.lazy)(function () {
+    return __webpack_require__.e(/*! import() */ "resources_js_modules_consumers_pages_list_index_js").then(__webpack_require__.bind(__webpack_require__, /*! ./pages/list */ "./resources/js/modules/consumers/pages/list/index.js"));
+  })
+}]);
+
+/***/ }),
+
 /***/ "./resources/js/modules/user/User.js":
 /*!*******************************************!*\
   !*** ./resources/js/modules/user/User.js ***!
@@ -3992,6 +4017,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_auth_routes__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../modules/auth/routes */ "./resources/js/modules/auth/routes.js");
 /* harmony import */ var _modules_user_routes__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../modules/user/routes */ "./resources/js/modules/user/routes.js");
 /* harmony import */ var _modules_article_routes__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../modules/article/routes */ "./resources/js/modules/article/routes.js");
+/* harmony import */ var _modules_consumers_route__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../modules/consumers/route */ "./resources/js/modules/consumers/route.js");
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -4009,7 +4035,8 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
 
 
-/* harmony default export */ __webpack_exports__["default"] = ([].concat(_toConsumableArray(_modules_web_routes__WEBPACK_IMPORTED_MODULE_0__["default"]), _toConsumableArray(_modules_auth_routes__WEBPACK_IMPORTED_MODULE_1__["default"]), _toConsumableArray(_modules_user_routes__WEBPACK_IMPORTED_MODULE_2__["default"]), _toConsumableArray(_modules_article_routes__WEBPACK_IMPORTED_MODULE_3__["default"])));
+
+/* harmony default export */ __webpack_exports__["default"] = ([].concat(_toConsumableArray(_modules_web_routes__WEBPACK_IMPORTED_MODULE_0__["default"]), _toConsumableArray(_modules_auth_routes__WEBPACK_IMPORTED_MODULE_1__["default"]), _toConsumableArray(_modules_user_routes__WEBPACK_IMPORTED_MODULE_2__["default"]), _toConsumableArray(_modules_article_routes__WEBPACK_IMPORTED_MODULE_3__["default"]), _toConsumableArray(_modules_consumers_route__WEBPACK_IMPORTED_MODULE_4__["default"])));
 
 /***/ }),
 
@@ -90524,7 +90551,7 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = function(chunkId) {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"resources_js_modules_web_pages_home_index_js":1,"resources_js_modules_web_pages_blog_list_index_js":1,"resources_js_modules_web_pages_blog_details_index_js":1,"resources_js_modules_auth_pages_login_index_js":1,"resources_js_modules_auth_pages_register_index_js":1,"resources_js_modules_user_pages_edit_index_js":1,"resources_js_modules_article_pages_list_index_js":1,"resources_js_modules_article_pages_add_index_js":1,"resources_js_modules_article_pages_edit_index_js":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_modules_web_pages_home_index_js":1,"resources_js_modules_web_pages_blog_list_index_js":1,"resources_js_modules_web_pages_blog_details_index_js":1,"resources_js_modules_auth_pages_login_index_js":1,"resources_js_modules_auth_pages_register_index_js":1,"resources_js_modules_user_pages_edit_index_js":1,"resources_js_modules_article_pages_list_index_js":1,"resources_js_modules_article_pages_add_index_js":1,"resources_js_modules_article_pages_edit_index_js":1,"resources_js_modules_consumers_pages_list_index_js":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};
