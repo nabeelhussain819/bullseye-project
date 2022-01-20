@@ -34,6 +34,10 @@ Route::group(['prefix' => 'survey'], function(){
     Route::post('/create',[SurveyController::class, 'store']);
 });
 
+Route::group(['prefix' => 'users'], function(){
+    Route::get('/', [UserController::class, 'index']);
+});
+
 Route::get('/user', function(Request $request) {
     return Auth::user();
 })->middleware('auth:api');
