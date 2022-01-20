@@ -1,68 +1,88 @@
 // import libs
-import React, {Component} from 'react'
-import PropTypes from 'prop-types'
+import React, { Component } from "react";
+import PropTypes from "prop-types";
 
 //import UserService from '~/services/API/UserService'
 
-import {Link} from 'react-router-dom'
+import { Link } from "react-router-dom";
 
 import UserService from "../../../../services/API/UsersService";
+import ConsumerRow from "./components/ConsumerRow";
 
 class Page extends Component {
-    static displayName = 'ArticlesPage'
+    static displayName = "ArticlesPage";
     static propTypes = {
         // meta: PropTypes.object.isRequired,
         // // articles: PropTypes.array.isRequired,
         // dispatch: PropTypes.func.isRequired,
-    }
+    };
 
     constructor(props) {
-        super(props)
+        super(props);
+
+        this.state = {
+            consumers: [],
+        };
     }
 
-    componentDidMount() {
-        const {dispatch} = this.props
-
+    async componentDidMount() {
+        const { dispatch } = this.props;
         //fetching API response @armash
-        UserService.all().then(response => {
-            console.log(response)
-        })
+        await UserService.all().then(({ data }) => {
+            this.setState({
+                consumers: data,
+            });
+        });
         // dispatch(articleListRequest({}))
     }
 
-
-    // renderArticles() {
-    //     return this.props.articles && this.props.articles.map((article, index) => {
-    //         return <ArticleRow key={index}
-    //                            article={article}
-    //                            index={index}
-    //                            togglePublish={this.togglePublish}
-    //                            handleRemove={this.handleRemove}/>
-    //     })
-    // }
+    renderConsumers() {
+        return this.state.consumers.map((consumer, index) => {
+            return <ConsumerRow key={index} consumer={consumer} />;
+        });
+    }
 
     render() {
-        return <main className="col-sm-9 ml-sm-auto col-md-10 pt-3" role="main">
-            <h1>User page</h1>
-            <table className="table table-responsive table-striped">
-                <thead className="thead-inverse">
-                <tr>
-                    <th>#</th>
-                    <th>Title</th>
-                    <th>Description</th>
-                    <th>Created At</th>
-                    <th>Updated At</th>
-                    <th>Published At</th>
-                    <th><Link to='/consumer/create' className="btn btn-success">Add</Link></th>
-                </tr>
-                </thead>
-                <tbody>
+        console.log(this.state.consumers);
+        return (
+            <main
+                className="col-sm-9 ml-sm-auto col-md-10 pt-3 mt-2"
+                role="main"
+            >
+                <h1>User page</h1>
+                <table className="table table-responsive table-striped">
+                    <thead className="thead-inverse">
+                        <tr>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Cell Number Primary</th>
+                            <th>Cell Number Secondary</th>
+                            <th>Cnic</th>
+                            <th>Gender</th>
+                            <th>City</th>
+                            <th>Qualification</th>
+                            <th>Designation</th>
+                            <th>Occupation</th>
+                            <th>Chief Earner</th>
+                            <th>Chief Earner Occupation</th>
+                            <th>Chief Earner Designation</th>
 
-                </tbody>
-            </table>
-
-        </main>
+                            <th>
+                                <Link
+                                    to="/consumer/create"
+                                    className="btn btn-success"
+                                >
+                                    Add
+                                </Link>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>{this.renderConsumers()}</tbody>
+                </table>
+            </main>
+        );
     }
 }
 
-export default Page
+export default Page;
