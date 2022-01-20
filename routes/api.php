@@ -31,3 +31,8 @@ Route::post('/otp-verification',[OtpController::class, 'verification']);
 Route::get('/user', function(Request $request) {
     return Auth::user();
 })->middleware('auth:api');
+
+Route::get('/website-url', function(){
+
+    return response()->json(['url' => url('/')]);
+});
