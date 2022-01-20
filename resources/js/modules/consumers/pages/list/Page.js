@@ -31,15 +31,15 @@ class Page extends Component {
     }
 
 
-    renderArticles() {
-        return this.props.articles && this.props.articles.map((article, index) => {
-            return <ArticleRow key={index}
-                               article={article}
-                               index={index}
-                               togglePublish={this.togglePublish}
-                               handleRemove={this.handleRemove}/>
-        })
-    }
+    // renderArticles() {
+    //     return this.props.articles && this.props.articles.map((article, index) => {
+    //         return <ArticleRow key={index}
+    //                            article={article}
+    //                            index={index}
+    //                            togglePublish={this.togglePublish}
+    //                            handleRemove={this.handleRemove}/>
+    //     })
+    // }
 
     render() {
         return <main className="col-sm-9 ml-sm-auto col-md-10 pt-3" role="main">
