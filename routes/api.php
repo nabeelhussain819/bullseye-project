@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\LinkController;
 use App\Http\Controllers\Api\LoginController;
 use App\Http\Controllers\Api\OtpController;
 use App\Http\Controllers\Api\RegisterController;
@@ -33,6 +34,13 @@ Route::post('/otp-verification',[OtpController::class, 'verification']);
 Route::group(['prefix' => 'survey'], function(){
 
     Route::post('/create',[SurveyController::class, 'store']);
+});
+
+Route::group(['prefix' => 'links'], function(){
+    Route::get('/', [LinkController::class, 'index']);
+    Route::post('/store',[LinkController::class, 'store']);
+    Route::post('/delete',[LinkController::class, 'destroy']);
+
 });
 
 Route::group(['prefix' => 'users'], function(){
