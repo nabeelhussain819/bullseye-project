@@ -2498,6 +2498,9 @@ function PrivateHeader(_ref) {
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_NavItem__WEBPACK_IMPORTED_MODULE_1__["default"], {
         path: "/consumers",
         children: "Users"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_NavItem__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        path: "/links",
+        children: "Links"
       })]
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("ul", {
       className: "navbar-nav",
@@ -2517,7 +2520,7 @@ function PrivateHeader(_ref) {
               className: "fa fa-user-o",
               title: "logout",
               "aria-hidden": "true"
-            }), " Profile"]
+            }), " ", "Profile"]
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_8__["default"], {
             divider: true
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(reactstrap__WEBPACK_IMPORTED_MODULE_8__["default"], {
@@ -2528,7 +2531,7 @@ function PrivateHeader(_ref) {
               className: "fa fa-sign-out",
               title: "logout",
               "aria-hidden": "true"
-            }), " Logout"]
+            }), " ", "Logout"]
           })]
         })]
       })
@@ -2536,7 +2539,7 @@ function PrivateHeader(_ref) {
   });
 } // bind properties
 
-PrivateHeader.displayName = 'PrivateHeader';
+PrivateHeader.displayName = "PrivateHeader";
 PrivateHeader.propTypes = {
   user: (prop_types__WEBPACK_IMPORTED_MODULE_9___default().object.isRequired),
   showNavigation: (prop_types__WEBPACK_IMPORTED_MODULE_9___default().bool.isRequired),
