@@ -95,4 +95,11 @@ class LinkController extends Controller
         $link->delete();
         return Common::sendError([],'Successfully delete link');
     }
+
+    public function getNewLink()
+    {
+        return [
+            'url' => Link::getNotExpired()->first()->name ?? url('/')
+        ];
+    }
 }

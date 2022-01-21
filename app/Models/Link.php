@@ -29,5 +29,9 @@ class Link extends Model
         });
     }
 
+    public function scopegetNotExpired($query)
+    {
+        $query->where('expired', self::NOT_EXPIRED);
+    }
 
 }
