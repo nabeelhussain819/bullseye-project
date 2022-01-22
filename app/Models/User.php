@@ -14,7 +14,7 @@ class User extends Authenticatable
 
     public const VERIFIED = 1;
     public const NOT_VERIFIED = 0;
-
+    public const ADMIN = 1;
 
     /**
      * The attributes that are mass assignable.
@@ -37,7 +37,8 @@ class User extends Authenticatable
         'chief_earner_qualification',
         'chief_earner_occupation',
         'chief_earner_designation',
-        'otp_verified'
+        'otp_verified',
+        'is_admin'
     ];
 
     /**
@@ -76,5 +77,10 @@ class User extends Authenticatable
     public function scopeVerified($query)
     {
         $query->where('otp_verified', self::VERIFIED);
+    }
+
+    public function isAdmin()
+    {
+        auth()->user()->is_admin == self::ADMIN ? true : false;
     }
 }
