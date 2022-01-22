@@ -8,6 +8,8 @@ import { Link } from "react-router-dom";
 
 import LinkService from "../../../../services/API/LinkService";
 import LinkRow from "./components/LinkRow";
+import { Alert, Badge, Spinner } from "reactstrap";
+import Message from "../../../../common/ui/Message";
 
 class Page extends Component {
     static displayName = "LinksPage";
@@ -23,14 +25,14 @@ class Page extends Component {
         this.state = {
             links: [],
             url: "",
+            showMessage: false,
         };
     }
 
     async componentDidMount() {
         const { dispatch } = this.props;
-        //fetching API response @armash
+
         await this.getAllLinks();
-        // dispatch(articleListRequest({}))
     }
 
     getAllLinks = () => {
@@ -40,6 +42,7 @@ class Page extends Component {
             });
         });
     };
+
     renderLinks() {
         return this.state.links.map((link, index) => {
             return <LinkRow key={index} link={link} index={index} />;
@@ -61,11 +64,25 @@ class Page extends Component {
         LinkService.post({ url: this.state.url }).then(({ data }) => {
             this.getAllLinks();
             this.resetInput();
+            this.setState(
+                {
+                    showMessage: true,
+                },
+                () => {
+                    setTimeout(() => {
+                        this.setState({
+                            showMessage: false,
+                        });
+                    }, 3000);
+                }
+            );
         });
     };
 
     resetInput = () => {
-        this.state.url = "";
+        this.setState({
+            url: "",
+        });
     };
 
     render() {
@@ -78,6 +95,17 @@ class Page extends Component {
                     </div>
                     <div className="card-body">
                         <div className="row">
+                            <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                {this.state.showMessage ? (
+                                    <Message
+                                        heading="Added Link"
+                                        text="Previous Link has been disabled"
+                                        variant="alert alert-success"
+                                    />
+                                ) : (
+                                    ""
+                                )}
+                            </div>
                             <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                                 <form onSubmit={this.submitHandler}>
                                     <fieldset>
