@@ -21,7 +21,7 @@ const LinkRow = ({ link, index }) => {
             <td>
                 {/* <button
                     className="btn btn-danger"
-                    onClick={handleDeleteHandler}
+                    onClick={deleteItem(link.id)}
                 >
                     DELETE
                 </button> */}

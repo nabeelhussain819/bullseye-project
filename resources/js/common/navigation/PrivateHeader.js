@@ -24,7 +24,6 @@ export default function PrivateHeader({
         <Collapse className="navbar-collapse" isOpen={showNavigation}>
             <ul className="navbar-nav mr-auto">
                 <NavItem path="/">Home</NavItem>
-                <NavItem path="/articles">Articles</NavItem>
                 <NavItem path="/consumers">Users</NavItem>
                 <NavItem path="/links">Links</NavItem>
             </ul>
