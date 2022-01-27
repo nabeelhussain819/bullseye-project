@@ -26,8 +26,8 @@ class Page extends Component {
         await this.getAllLinks();
     }
 
-    getAllLinks = () => {
-        LinkService.all().then(({ data }) => {
+    getAllLinks = async () => {
+        await LinkService.all().then(({ data }) => {
             this.setState({
                 links: data,
             });
