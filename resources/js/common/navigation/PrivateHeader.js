@@ -24,7 +24,7 @@ export default function PrivateHeader({
         <Collapse className="navbar-collapse" isOpen={showNavigation}>
             <ul className="navbar-nav mr-auto">
                 <NavItem path="/">Home</NavItem>
-                <NavItem path="/consumers">Users</NavItem>
+                <NavItem path="/consumers">Consumers</NavItem>
                 <NavItem path="/links">Links</NavItem>
             </ul>
 
@@ -34,7 +34,7 @@ export default function PrivateHeader({
                         {user.name}
                     </DropdownToggle>
                     <DropdownMenu className="dropdown-menu-right">
-                        <Link
+                        {/* <Link
                             className="dropdown-item"
                             to={`/users/${user.id}/edit`}
                         >
@@ -44,8 +44,7 @@ export default function PrivateHeader({
                                 aria-hidden="true"
                             />{" "}
                             Profile
-                        </Link>
-                        <DropdownItem divider />
+                        </Link> */}
                         <DropdownItem onClick={(e) => logout(e)}>
                             <span
                                 className="fa fa-sign-out"

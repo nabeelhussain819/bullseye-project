@@ -2458,14 +2458,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": function() { return /* binding */ PrivateHeader; }
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_8__);
 /* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/es/Collapse.js");
 /* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/es/Dropdown.js");
 /* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/es/DropdownToggle.js");
 /* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/es/DropdownMenu.js");
-/* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/es/DropdownItem.js");
+/* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/es/DropdownItem.js");
 /* harmony import */ var _NavItem__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./NavItem */ "./resources/js/common/navigation/NavItem.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 // import libs
@@ -2494,7 +2493,7 @@ function PrivateHeader(_ref) {
         children: "Home"
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_NavItem__WEBPACK_IMPORTED_MODULE_1__["default"], {
         path: "/consumers",
-        children: "Users"
+        children: "Consumers"
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_NavItem__WEBPACK_IMPORTED_MODULE_1__["default"], {
         path: "/links",
         children: "Links"
@@ -2508,19 +2507,9 @@ function PrivateHeader(_ref) {
           nav: true,
           caret: true,
           children: user.name
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(reactstrap__WEBPACK_IMPORTED_MODULE_6__["default"], {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_6__["default"], {
           className: "dropdown-menu-right",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Link, {
-            className: "dropdown-item",
-            to: "/users/".concat(user.id, "/edit"),
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
-              className: "fa fa-user-o",
-              title: "logout",
-              "aria-hidden": "true"
-            }), " ", "Profile"]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_8__["default"], {
-            divider: true
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(reactstrap__WEBPACK_IMPORTED_MODULE_8__["default"], {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(reactstrap__WEBPACK_IMPORTED_MODULE_7__["default"], {
             onClick: function onClick(e) {
               return logout(e);
             },
@@ -2529,7 +2518,7 @@ function PrivateHeader(_ref) {
               title: "logout",
               "aria-hidden": "true"
             }), " ", "Logout"]
-          })]
+          })
         })]
       })
     })]
@@ -2538,11 +2527,11 @@ function PrivateHeader(_ref) {
 
 PrivateHeader.displayName = "PrivateHeader";
 PrivateHeader.propTypes = {
-  user: (prop_types__WEBPACK_IMPORTED_MODULE_9___default().object.isRequired),
-  showNavigation: (prop_types__WEBPACK_IMPORTED_MODULE_9___default().bool.isRequired),
-  showDropdown: (prop_types__WEBPACK_IMPORTED_MODULE_9___default().bool.isRequired),
-  toggleDropdown: (prop_types__WEBPACK_IMPORTED_MODULE_9___default().func.isRequired),
-  logout: (prop_types__WEBPACK_IMPORTED_MODULE_9___default().func.isRequired)
+  user: (prop_types__WEBPACK_IMPORTED_MODULE_8___default().object.isRequired),
+  showNavigation: (prop_types__WEBPACK_IMPORTED_MODULE_8___default().bool.isRequired),
+  showDropdown: (prop_types__WEBPACK_IMPORTED_MODULE_8___default().bool.isRequired),
+  toggleDropdown: (prop_types__WEBPACK_IMPORTED_MODULE_8___default().func.isRequired),
+  logout: (prop_types__WEBPACK_IMPORTED_MODULE_8___default().func.isRequired)
 };
 
 /***/ }),
@@ -3604,11 +3593,18 @@ __webpack_require__.r(__webpack_exports__);
 // import lib
 
 /* harmony default export */ __webpack_exports__["default"] = ([{
-  path: '/consumers',
+  path: "/consumers",
   exact: true,
   auth: true,
   component: /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.lazy)(function () {
     return __webpack_require__.e(/*! import() */ "resources_js_modules_consumers_pages_list_index_js").then(__webpack_require__.bind(__webpack_require__, /*! ./pages/list */ "./resources/js/modules/consumers/pages/list/index.js"));
+  })
+}, {
+  path: "/consumers/create",
+  exact: true,
+  auth: true,
+  component: /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.lazy)(function () {
+    return __webpack_require__.e(/*! import() */ "resources_js_modules_consumers_pages_add_index_js").then(__webpack_require__.bind(__webpack_require__, /*! ./pages/add */ "./resources/js/modules/consumers/pages/add/index.js"));
   })
 }]);
 
@@ -90979,7 +90975,7 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = function(chunkId) {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"resources_js_modules_web_pages_home_index_js":1,"resources_js_modules_web_pages_blog_list_index_js":1,"resources_js_modules_web_pages_blog_details_index_js":1,"resources_js_modules_auth_pages_login_index_js":1,"resources_js_modules_auth_pages_register_index_js":1,"resources_js_modules_user_pages_edit_index_js":1,"resources_js_modules_article_pages_list_index_js":1,"resources_js_modules_article_pages_add_index_js":1,"resources_js_modules_article_pages_edit_index_js":1,"resources_js_modules_consumers_pages_list_index_js":1,"resources_js_modules_links_pages_list_index_js":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_modules_web_pages_home_index_js":1,"resources_js_modules_web_pages_blog_list_index_js":1,"resources_js_modules_web_pages_blog_details_index_js":1,"resources_js_modules_auth_pages_login_index_js":1,"resources_js_modules_auth_pages_register_index_js":1,"resources_js_modules_user_pages_edit_index_js":1,"resources_js_modules_article_pages_list_index_js":1,"resources_js_modules_article_pages_add_index_js":1,"resources_js_modules_article_pages_edit_index_js":1,"resources_js_modules_consumers_pages_list_index_js":1,"resources_js_modules_consumers_pages_add_index_js":1,"resources_js_modules_links_pages_list_index_js":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};

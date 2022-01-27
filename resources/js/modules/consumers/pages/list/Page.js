@@ -43,44 +43,45 @@ class Page extends Component {
     }
 
     render() {
-        console.log(this.state.consumers);
         return (
-            <main
-                className="col-sm-9 ml-sm-auto col-md-10 pt-3 mt-2"
-                role="main"
-            >
-                <h1>User page</h1>
-                <table className="table table-responsive table-striped">
-                    <thead className="thead-inverse">
-                        <tr>
-                            <th>#</th>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Cell Number Primary</th>
-                            <th>Cell Number Secondary</th>
-                            <th>Cnic</th>
-                            <th>Gender</th>
-                            <th>City</th>
-                            <th>Qualification</th>
-                            <th>Designation</th>
-                            <th>Occupation</th>
-                            <th>Chief Earner</th>
-                            <th>Chief Earner Occupation</th>
-                            <th>Chief Earner Designation</th>
-
-                            <th>
-                                <Link
-                                    to="/consumer/create"
-                                    className="btn btn-success"
-                                >
-                                    Add
-                                </Link>
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>{this.renderConsumers()}</tbody>
-                </table>
-            </main>
+            <div className="container pt-5">
+                <div className="card ">
+                    <div className="card-header">
+                        <h1>
+                            Consumers
+                            {/* <Link
+                                to="/consumers/create"
+                                className="btn btn-success float-right"
+                            >
+                                Add New Consumer
+                            </Link> */}
+                        </h1>
+                    </div>
+                    <div className="card-body">
+                        <table className="table table-responsive table-striped">
+                            <thead className="thead-inverse">
+                                <tr>
+                                    <th>#</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Cell Number Primary</th>
+                                    <th>Cell Number Secondary</th>
+                                    <th>Cnic</th>
+                                    <th>Gender</th>
+                                    <th>City</th>
+                                    <th>Qualification</th>
+                                    <th>Designation</th>
+                                    <th>Occupation</th>
+                                    <th>Chief Earner</th>
+                                    <th>Chief Earner Occupation</th>
+                                    <th>Chief Earner Designation</th>
+                                </tr>
+                            </thead>
+                            <tbody>{this.renderConsumers()}</tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
         );
     }
 }

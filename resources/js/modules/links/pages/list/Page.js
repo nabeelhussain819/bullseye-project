@@ -1,23 +1,11 @@
-// import libs
 import React, { Component } from "react";
-import PropTypes from "prop-types";
-
-//import UserService from '~/services/API/UserService'
-
-import { Link } from "react-router-dom";
-
 import LinkService from "../../../../services/API/LinkService";
 import LinkRow from "./components/LinkRow";
-import { Alert, Badge, Spinner } from "reactstrap";
 import Message from "../../../../common/ui/Message";
 
 class Page extends Component {
     static displayName = "LinksPage";
-    static propTypes = {
-        // meta: PropTypes.object.isRequired,
-        // // articles: PropTypes.array.isRequired,
-        // dispatch: PropTypes.func.isRequired,
-    };
+    static propTypes = {};
 
     constructor(props) {
         super(props);
@@ -140,7 +128,7 @@ class Page extends Component {
                             </div>
 
                             <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                                <table className="table">
+                                <table className="table table-responsive">
                                     <thead>
                                         <tr>
                                             <th scope="col">#</th>
