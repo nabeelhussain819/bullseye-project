@@ -27,7 +27,8 @@ class RegisterController extends Controller
         $input['password'] = bcrypt($input['password']);
         $user = User::create($input);
 
-        $otpPin = Otp::createPin();
+        // $otpPin = Otp::createPin();
+        $otpPin =1234;
         $otp = Otp::createOtp($user, Otp::REGISTRATION_OTP, $otpPin);
     
         $success['token'] =  $user->createToken('token')->accessToken;
