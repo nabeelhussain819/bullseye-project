@@ -1,7 +1,9 @@
-const LinkRow = ({ link, index }) => {
+const LinkRow = ({ link, index, handleDelete, handleStatusChange }) => {
     let badge = (status) => {
         return (
             <span
+                role="button"
+                onClick={() => handleStatusChange(link.id)}
                 className={
                     status
                         ? "badge badge-success p-2 fw-bolder shadow-lg"
@@ -19,12 +21,12 @@ const LinkRow = ({ link, index }) => {
             <td>{link.name}</td>
             <td>{badge(link.expired)}</td>
             <td>
-                {/* <button
+                <button
                     className="btn btn-danger"
-                    onClick={deleteItem(link.id)}
+                    onClick={() => handleDelete(link.id)}
                 >
                     DELETE
-                </button> */}
+                </button>
             </td>
         </tr>
     );

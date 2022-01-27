@@ -27,6 +27,12 @@ class Link extends Model
                 'expired' => self::EXPIRED
             ]);
         });
+
+        static::updating(function($model){
+            $model->orderBy('id','desc')->where('expired', self::NOT_EXPIRED)->update([
+                'expired' => self::EXPIRED
+            ]);
+        });
     }
 
     public function scopegetNotExpired($query)

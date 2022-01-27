@@ -19,10 +19,15 @@ function remove(params = {}) {
     return axios.post(baseUrl + "/delete", params);
 }
 
+function updateStatus(params = {}) {
+    return axios.post(baseUrl + "/update-status", params);
+}
+
 const UserService = {
     all,
     post,
     remove,
+    updateStatus,
 };
 
 export default UserService;

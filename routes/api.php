@@ -40,7 +40,7 @@ Route::group(['prefix' => 'links'], function(){
     Route::get('/', [LinkController::class, 'index']);
     Route::post('/store',[LinkController::class, 'store']);
     Route::post('/delete',[LinkController::class, 'destroy']);
-
+    Route::post('/update-status',[LinkController::class, 'updateLinkStatus']);
 });
 
 Route::group(['prefix' => 'users'], function(){

@@ -93,7 +93,7 @@ class LinkController extends Controller
         //
         $link = Link::findorFail($request->id);
         $link->delete();
-        return Common::sendError([],'Successfully delete link');
+        return Common::sendResponse([],'Successfully delete link');
     }
 
     public function getNewLink()
@@ -101,5 +101,14 @@ class LinkController extends Controller
         return [
             'url' => Link::getNotExpired()->first()->name ?? url('/')
         ];
+    }
+    
+    public function updateLinkStatus(Request $request)
+    {
+        $link = Link::findOrFail($request->id);
+        $link->update([
+            'expired' => Link::NOT_EXPIRED,
+        ]);
+        return Common::sendResponse($link, "Link Has Been Activated.");
     }
 }

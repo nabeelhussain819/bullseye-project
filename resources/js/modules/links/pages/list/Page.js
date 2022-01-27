@@ -14,6 +14,9 @@ class Page extends Component {
             links: [],
             url: "",
             showMessage: false,
+            messageText: "",
+            messageHeading: "",
+            messageVariant: "",
         };
     }
 
@@ -31,12 +34,6 @@ class Page extends Component {
         });
     };
 
-    renderLinks() {
-        return this.state.links.map((link, index) => {
-            return <LinkRow key={index} link={link} index={index} />;
-        });
-    }
-
     handleInputChange = (e) => {
         this.setState({ [e.target.name]: e.target.value });
     };
@@ -52,25 +49,68 @@ class Page extends Component {
         LinkService.post({ url: this.state.url }).then(({ data }) => {
             this.getAllLinks();
             this.resetInput();
-            this.setState(
-                {
-                    showMessage: true,
-                },
-                () => {
-                    setTimeout(() => {
-                        this.setState({
-                            showMessage: false,
-                        });
-                    }, 3000);
-                }
+            this.message(
+                true,
+                "Previous Link has been disabled",
+                "Added Link",
+                "alert alert-success"
             );
         });
+    };
+
+    message = (status, text, heading, variant) => {
+        this.setState(
+            {
+                showMessage: status,
+                messageText: text,
+                messageHeading: heading,
+                messageVariant: variant,
+            },
+            () => {
+                setTimeout(() => {
+                    this.setState({
+                        showMessage: false,
+                        messageText: "",
+                        messageHeading: "",
+                        messageVariant: "",
+                    });
+                }, 3000);
+            }
+        );
     };
 
     resetInput = () => {
         this.setState({
             url: "",
         });
+    };
+
+    handleDelete = async (id) => {
+        await LinkService.remove({ id: id })
+            .then(({ data }) => {
+                this.getAllLinks();
+                this.message(
+                    true,
+                    "Link Has Been removed",
+                    "Removed Link",
+                    "alert alert-success"
+                );
+            })
+            .catch(() => {});
+    };
+
+    handleStatusChange = async (id) => {
+        await LinkService.updateStatus({ id: id })
+            .then(({ data }) => {
+                this.getAllLinks();
+                this.message(
+                    true,
+                    "Link Now Current Active Link",
+                    "Link Status Changed",
+                    "alert alert-success"
+                );
+            })
+            .catch(() => {});
     };
 
     render() {
@@ -86,9 +126,9 @@ class Page extends Component {
                             <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                 {this.state.showMessage ? (
                                     <Message
-                                        heading="Added Link"
-                                        text="Previous Link has been disabled"
-                                        variant="alert alert-success"
+                                        heading={this.state.messageHeading}
+                                        text={this.state.messageText}
+                                        variant={this.state.messageVariant}
                                     />
                                 ) : (
                                     ""
@@ -137,7 +177,23 @@ class Page extends Component {
                                             <th scope="col">Actions</th>
                                         </tr>
                                     </thead>
-                                    <tbody>{this.renderLinks()}</tbody>
+                                    <tbody>
+                                        {this.state.links.map((link, index) => {
+                                            return (
+                                                <LinkRow
+                                                    key={index}
+                                                    link={link}
+                                                    index={index}
+                                                    handleDelete={
+                                                        this.handleDelete
+                                                    }
+                                                    handleStatusChange={
+                                                        this.handleStatusChange
+                                                    }
+                                                />
+                                            );
+                                        })}
+                                    </tbody>
                                 </table>
                             </div>
                         </div>
