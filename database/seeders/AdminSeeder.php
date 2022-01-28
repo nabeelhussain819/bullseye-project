@@ -18,8 +18,8 @@ class AdminSeeder extends Seeder
         //
         User::create([
             'name' => 'admin',
-            'email' => 'admin@admin.com',
-            'password' => Hash::make('secret'),
+            'email' => 'superadmin@admin.com',
+            'password' => Hash::make('1Pakistan?'),
             'is_admin' => true,
             'otp_verified' => true,
             'cell_number_primary' => '0300100020'
