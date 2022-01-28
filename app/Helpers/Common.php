@@ -3,19 +3,20 @@
 namespace App\Helpers;
 
 
-class Common{
+class Common
+{
 
-    
-        /**
+
+    /**
      * success response method.
      *
      * @return \Illuminate\Http\Response
      */
     static function sendResponse($result, $message)
     {
-    	$response = [
+        $response = [
             'success' => true,
-            'data'    => $result,
+            'data' => $result,
             'message' => $message,
         ];
 
@@ -31,14 +32,14 @@ class Common{
      */
     static function sendError($error, $errorMessages = [], $code = 404)
     {
-    	$response = [
+        $response = [
             'success' => false,
             'message' => $error,
         ];
 
 
-        if(!empty($errorMessages)){
-            $response['data'] = $errorMessages;
+        if (!empty($errorMessages)) {
+            $response['errors'] = $errorMessages;
         }
 
 
