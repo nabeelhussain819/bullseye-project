@@ -7,17 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * @property integer $id
  * @property string $name
- * @property string $url
- * @property string $description
- * @property int $claims_count
- * @property boolean $active
- * @property integer $created_by
- * @property integer $updated_by
+ * @property string $alias
+ * @property string $color_code
  * @property string $created_at
  * @property string $updated_at
  * @property Claim[] $claims
  */
-class Survey extends Model
+class Status extends Model
 {
     /**
      * The "type" of the auto-incrementing ID.
@@ -29,7 +25,7 @@ class Survey extends Model
     /**
      * @var array
      */
-    protected $fillable = ['name', 'url', 'description', 'claims_count', 'active', 'created_by', 'updated_by', 'created_at', 'updated_at'];
+    protected $fillable = ['name', 'alias', 'color_code', 'created_at', 'updated_at'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany

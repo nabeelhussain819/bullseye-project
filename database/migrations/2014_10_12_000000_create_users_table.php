@@ -20,7 +20,8 @@ class CreateUsersTable extends Migration
             $table->string('cell_number_primary')->unique();
             $table->string('cell_number_secondary')->nullable();
             $table->string('cnic')->nullable();
-            $table->enum('gender',['MALE','FEMALE','OTHER'])->nullable();
+//            $table->enum('gender',['MALE','FEMALE','OTHER'])->nullable(); https://stackoverflow.com/questions/33140860/laravel-5-1-unknown-database-type-enum-requested
+            $table->tinyInteger('gender')->nullable()->comment("1 for make 2 for women 3 for other");
             $table->string('password');
             $table->string('city')->nullable();
             $table->string('qualification')->nullable();
