@@ -15,9 +15,13 @@ class CreateSurveysTable extends Migration
     {
         Schema::create('surveys', function (Blueprint $table) {
             $table->id();
-            $table->string('title')->nullable();
+            $table->string('name');
+            $table->string('url');
             $table->string('description')->nullable();
-            $table->boolean('status')->default(false);
+            $table->integer('claims_count')->nullable();
+            $table->boolean('active')->default(false);
+            $table->unsignedBigInteger('created_by')->nullable();
+            $table->unsignedBigInteger('updated_by')->nullable();
             $table->timestamps();
         });
     }
