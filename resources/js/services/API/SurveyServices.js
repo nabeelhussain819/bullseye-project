@@ -1,8 +1,8 @@
 import axios from "axios";
-import * as constants from "../Constant";
+import { BASE_APP } from "../Constant";
 import request from "../request";
 
-const baseUrl = `/surveys`;
+const baseUrl = `${BASE_APP}surveys`;
 
 function all(params = {}) {
     return request({

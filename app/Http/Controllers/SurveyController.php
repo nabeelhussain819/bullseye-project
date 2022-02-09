@@ -17,10 +17,6 @@ class SurveyController extends Controller
      *
      */
 
-    public function __construct(Survey $model)
-    {
-        $this->model = $model;
-    }
 
     /**
      * Display a listing of the resource.
@@ -29,8 +25,8 @@ class SurveyController extends Controller
      */
     public function index()
     {
-        return ['a'];
-        // continue work from herer 
+        return Survey::paginate($this->pageSize);
+        // continue work from herer
     }
 
     /**

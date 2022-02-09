@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import LinkService from "../../../../services/API/SurveyServices";
+import SurveyService from "../../../../services/API/SurveyServices";
 import LinkRow from "./components/LinkRow";
 import Message from "../../../../common/ui/Message";
 
@@ -11,7 +11,7 @@ class Page extends Component {
         super(props);
 
         this.state = {
-            links: [],
+            surveys: [],
             url: "",
             showMessage: false,
             messageText: "",
@@ -27,9 +27,9 @@ class Page extends Component {
     }
 
     getAllLinks = async () => {
-        await LinkService.all().then(({ data }) => {
+        await SurveyService.all().then((surveys) => {
             this.setState({
-                links: data,
+                surveys: surveys.data,
             });
         });
     };
@@ -46,7 +46,7 @@ class Page extends Component {
             return;
         }
 
-        LinkService.post({ url: this.state.url }).then(({ data }) => {
+        SurveyService.post({ url: this.state.url }).then(({ data }) => {
             this.getAllLinks();
             this.resetInput();
             this.message(
@@ -86,7 +86,7 @@ class Page extends Component {
     };
 
     handleDelete = async (id) => {
-        await LinkService.remove({ id: id })
+        await SurveyService.remove({ id: id })
             .then(({ data }) => {
                 this.getAllLinks();
                 this.message(
@@ -100,7 +100,7 @@ class Page extends Component {
     };
 
     handleStatusChange = async (id) => {
-        await LinkService.updateStatus({ id: id })
+        await SurveyService.updateStatus({ id: id })
             .then(({ data }) => {
                 this.getAllLinks();
                 this.message(
@@ -178,21 +178,24 @@ class Page extends Component {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {this.state.links.map((link, index) => {
-                                            return (
-                                                <LinkRow
-                                                    key={index}
-                                                    link={link}
-                                                    index={index}
-                                                    handleDelete={
-                                                        this.handleDelete
-                                                    }
-                                                    handleStatusChange={
-                                                        this.handleStatusChange
-                                                    }
-                                                />
-                                            );
-                                        })}
+                                        {this.state.surveys.map(
+                                            (link, index) => {
+                                                return (
+                                                    <LinkRow
+                                                        key={index}
+                                                        link={link}
+                                                        index={index}
+                                                        handleDelete={
+                                                            this.handleDelete
+                                                        }
+                                                        handleStatusChange={
+                                                            this
+                                                                .handleStatusChange
+                                                        }
+                                                    />
+                                                );
+                                            }
+                                        )}
                                     </tbody>
                                 </table>
                             </div>

@@ -25,7 +25,8 @@ export default function PrivateHeader({
             <ul className="navbar-nav mr-auto">
                 <NavItem path="/">Home</NavItem>
                 <NavItem path="/consumers">Consumers</NavItem>
-                <NavItem path="/links">Links</NavItem>
+                {/* <NavItem path="/links">Links</NavItem> */}
+                <NavItem path="/survey">Survey</NavItem>
             </ul>
 
             <ul className="navbar-nav">
