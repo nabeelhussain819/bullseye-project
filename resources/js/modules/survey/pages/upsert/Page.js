@@ -36,10 +36,11 @@ class Page extends Component {
         //     alert("Please Enter the link for the url");
         //     return;
         // }
-        console.log(this.state.survey);
+        this.setState({ survey: {} }, () => {});
+
         SurveyService.post({ ...this.state.survey }).then(({ data }) => {
             this.getAllLinks();
-            this.resetInput();
+            this.setState({ survey: {} });
             this.message(
                 true,
                 "Previous Link has been disabled",
