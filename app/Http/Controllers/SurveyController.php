@@ -10,11 +10,11 @@ use Illuminate\Support\Facades\Validator;
 class SurveyController extends Controller
 {
     private $model;
-    
+
     /**
      * Constructor
      *
-     * 
+     *
      */
 
     public function __construct(Survey $model)
@@ -29,7 +29,8 @@ class SurveyController extends Controller
      */
     public function index()
     {
-        //
+        return ['a'];
+        // continue work from herer 
     }
 
     /**
@@ -45,18 +46,15 @@ class SurveyController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        //
-
         DD($request->all());
         $validate = $this->validator($request->all());
 
-        if($validate->fails())
-        {
+        if ($validate->fails()) {
             return Common::sendError('Some Error Occured', $validate->errors());
         }
 
@@ -71,7 +69,7 @@ class SurveyController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Survey  $survey
+     * @param \App\Models\Survey $survey
      * @return \Illuminate\Http\Response
      */
     public function show(Survey $survey)
@@ -82,7 +80,7 @@ class SurveyController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Survey  $survey
+     * @param \App\Models\Survey $survey
      * @return \Illuminate\Http\Response
      */
     public function edit(Survey $survey)
@@ -93,8 +91,8 @@ class SurveyController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Survey  $survey
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Models\Survey $survey
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Survey $survey)
@@ -105,7 +103,7 @@ class SurveyController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Survey  $survey
+     * @param \App\Models\Survey $survey
      * @return \Illuminate\Http\Response
      */
     public function destroy(Survey $survey)

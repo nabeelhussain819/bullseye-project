@@ -21,7 +21,13 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+Route::middleware(['auth'])->group(function () {
+    Route::apiResources([
+        'surveys' => \App\Http\Controllers\SurveyController::class,
+    ]);
+});
 
-Route::get( '/{any}', function () {
+
+Route::get('/{any}', function () {
     return view('index');
 })->where('any', '.*');

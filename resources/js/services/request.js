@@ -1,8 +1,14 @@
-import axios from 'axios'
+import axios from "axios";
 
-const client = axios.create()
+const client = axios.create();
 
 const request = function (options) {
+    // console.log();
+    // console.log(options);
+    // options.headers = {
+    //     'X-CSRF-Token': document.querySelector("meta[name=csrf-token]").content,
+    // };
+    // console.log(options);
     const onSuccess = function (response) {
         return response.data;
     };
@@ -14,19 +20,17 @@ const request = function (options) {
             // console.error('Data:', err.response.data);
             // console.error('Headers:', err.response.headers);
             if (err.response.status === 401) {
-                window.location = '/login'
+                window.location = "/login";
             }
         } else {
-            console.error('Error Message:', err.message);
+            console.error("Error Message:", err.message);
         }
 
         //return Promise.reject(err.response || err.message);
         return Promise.reject(err);
     };
 
-    return client(options)
-        .then(onSuccess)
-        .catch(onError);
+    return client(options).then(onSuccess).catch(onError);
 };
 
 export default request;

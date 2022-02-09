@@ -28,27 +28,36 @@ Route::post('/login', [LoginController::class, 'login']);
 
 Route::post('/signup', [RegisterController::class, 'register']);
 
-Route::post('/otp-verification',[OtpController::class, 'verification']);
+Route::post('/otp-verification', [OtpController::class, 'verification']);
 
 
-Route::group(['prefix' => 'survey'], function(){
-
-    Route::post('/create',[SurveyController::class, 'store']);
+Route::group(['prefix' => 'survey'], function () {
+    Route::post('/create', [SurveyController::class, 'store']);
 });
 
-Route::group(['prefix' => 'links'], function(){
+Route::group(['prefix' => 'links'], function () {
     Route::get('/', [LinkController::class, 'index']);
-    Route::post('/store',[LinkController::class, 'store']);
-    Route::post('/delete',[LinkController::class, 'destroy']);
-    Route::post('/update-status',[LinkController::class, 'updateLinkStatus']);
+    Route::post('/store', [LinkController::class, 'store']);
+    Route::post('/delete', [LinkController::class, 'destroy']);
+    Route::post('/update-status', [LinkController::class, 'updateLinkStatus']);
 });
 
-Route::group(['prefix' => 'users'], function(){
+Route::group(['prefix' => 'users'], function () {
     Route::get('/', [UserController::class, 'index']);
 });
 
-Route::get('/user', function(Request $request) {
+Route::get('/user', function (Request $request) {
     return Auth::user();
 })->middleware('auth:api');
 
 Route::get('/website-url', [LinkController::class, 'getNewLink']);
+
+
+/////// Web Application redirection
+
+//
+//Route::middleware('auth')->group(function () {
+//    Route::apiResources([
+//        'survey' => \App\Http\Controllers\SurveyController::class,
+//    ]);
+//});
