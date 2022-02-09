@@ -12,7 +12,7 @@ function all(params = {}) {
 }
 
 function post(params = {}) {
-    return axios.post(baseUrl + "/store", params);
+    return axios.post(baseUrl, params);
 }
 
 function remove(params = {}) {

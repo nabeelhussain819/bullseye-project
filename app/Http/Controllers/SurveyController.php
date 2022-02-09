@@ -47,19 +47,20 @@ class SurveyController extends Controller
      */
     public function store(Request $request)
     {
-        DD($request->all());
-        $validate = $this->validator($request->all());
-
-        if ($validate->fails()) {
-            return Common::sendError('Some Error Occured', $validate->errors());
-        }
-
-        $survey = $this->model::create([
-            'title' => $request->get('title'),
-            'description' => $request->get('description')
-        ]);
-
-        return Common::sendResponse($survey, 'Successfully Added !');
+//        DD($request->all());
+        return Survey::create($request->all());
+//        $validate = $this->validator($request->all());
+//
+//        if ($validate->fails()) {
+//            return Common::sendError('Some Error Occured', $validate->errors());
+//        }
+//
+//        $survey = $this->model::create([
+//            'title' => $request->get('title'),
+//            'description' => $request->get('description')
+//        ]);
+//
+//        return Common::sendResponse($survey, 'Successfully Added !');
     }
 
     /**

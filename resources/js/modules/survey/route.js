@@ -8,4 +8,10 @@ export default [
         auth: true,
         component: lazy(() => import("./pages/list")),
     },
+    {
+        path: "/survey/create",
+        exact: true,
+        auth: true,
+        component: lazy(() => import("./pages/upsert")),
+    },
 ];
