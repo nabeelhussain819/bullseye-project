@@ -72,4 +72,9 @@ class Claim extends Model
             ->where('status_id', Status::NEW_REQUEST_ID)
             ->first();
     }
+
+    public static function statistics()
+    {
+
+    }
 }

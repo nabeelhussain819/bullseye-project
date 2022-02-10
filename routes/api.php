@@ -32,8 +32,6 @@ Route::post('/signup', [RegisterController::class, 'register']);
 Route::post('/otp-verification', [OtpController::class, 'verification']);
 
 
-
-
 Route::group(['prefix' => 'survey'], function () {
     Route::post('/create', [SurveyController::class, 'store']);
 });
@@ -69,6 +67,11 @@ Route::get('/website-url', [LinkController::class, 'getNewLink']);
 Route::middleware('auth:api')->group(function () {
 
     Route::get('/website-url', [LinkController::class, 'getNewLink']);
+
+    Route::group(['prefix' => 'claim'], function () {
+        Route::get('/statistics', [Api\ClaimController::class, 'statistics']);
+    });
+
     Route::apiResources([
         'claim' => Api\ClaimController::class,
     ]);

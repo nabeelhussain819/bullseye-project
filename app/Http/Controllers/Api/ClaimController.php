@@ -14,9 +14,11 @@ class ClaimController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        return Claim::where($this->applyFilters($request))
+            ->where('user_id', Auth::user()->id)
+            ->paginate($this->pageSize);
     }
 
     /**
@@ -85,5 +87,16 @@ class ClaimController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function statistics(Request $request)
+    {
+        //return Claim::statistics(); make on real data
+        return [
+            'total' => 3,
+            'pending' => 2,
+            'completed' => 3,
+            'rejected' => 2
+        ];
     }
 }
