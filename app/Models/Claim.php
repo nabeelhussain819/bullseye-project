@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Observers\ClaimObservers;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -54,5 +55,11 @@ class Claim extends Model
     public function status()
     {
         return $this->belongsTo('App\Models\Status');
+    }
+    public static function boot()
+    {
+        parent::boot();
+
+        Claim::observe(ClaimObservers::class);
     }
 }

@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\OtpController;
 use App\Http\Controllers\Api\RegisterController;
 use App\Http\Controllers\SurveyController;
 use App\Http\Controllers\Api\UserController;
+use \App\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -31,9 +32,12 @@ Route::post('/signup', [RegisterController::class, 'register']);
 Route::post('/otp-verification', [OtpController::class, 'verification']);
 
 
+
+
 Route::group(['prefix' => 'survey'], function () {
     Route::post('/create', [SurveyController::class, 'store']);
 });
+
 
 Route::group(['prefix' => 'links'], function () {
     Route::get('/', [LinkController::class, 'index']);
@@ -61,3 +65,12 @@ Route::get('/website-url', [LinkController::class, 'getNewLink']);
 //        'survey' => \App\Http\Controllers\SurveyController::class,
 //    ]);
 //});
+
+Route::middleware('auth:api')->group(function () {
+
+    Route::get('/website-url', [LinkController::class, 'getNewLink']);
+    Route::apiResources([
+        'claim' => Api\ClaimController::class,
+    ]);
+
+});

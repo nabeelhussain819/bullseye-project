@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Exceptions\ApiException;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -37,5 +38,14 @@ class Survey extends Model
     public function claims()
     {
         return $this->hasMany('App\Models\Claim');
+    }
+
+    public static function getActiveSurveyId(): int
+    {
+        $survey = Survey::where('active', true)->first();
+        if (empty($survey)) {
+            throw new ApiException("No Active survey found");
+        }
+        return $survey->id;
     }
 }
