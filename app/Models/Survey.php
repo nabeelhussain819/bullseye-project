@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Exceptions\ApiException;
+use App\Observers\ClaimObservers;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -47,6 +48,13 @@ class Survey extends Model
             throw new ApiException("No Active survey found");
         }
         return $survey->id;
+    }
+
+    public static function boot()
+    {
+        parent::boot();
+
+        Claim::observe(SurveyObserver::class);
     }
 
 

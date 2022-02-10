@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Helpers\Common;
 use App\Models\Survey;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
 class SurveyController extends Controller
@@ -47,8 +48,10 @@ class SurveyController extends Controller
      */
     public function store(Request $request)
     {
-//        DD($request->all());
-        return Survey::create($request->all());
+        return DB::transaction(function () use ($request) {
+            return Survey::create($request->all());
+        });
+
 //        $validate = $this->validator($request->all());
 //
 //        if ($validate->fails()) {
