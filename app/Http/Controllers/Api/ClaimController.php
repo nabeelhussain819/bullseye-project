@@ -37,9 +37,9 @@ class ClaimController extends Controller
      */
     public function store(Request $request)
     {
-
-
         Claim::create();
+        return $this->genericResponse(true, "your claim has been posted");
+
     }
 
     /**

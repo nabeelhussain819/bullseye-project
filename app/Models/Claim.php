@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Observers\ClaimObservers;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * @property integer $id
@@ -56,10 +57,19 @@ class Claim extends Model
     {
         return $this->belongsTo('App\Models\Status');
     }
+
     public static function boot()
     {
         parent::boot();
 
         Claim::observe(ClaimObservers::class);
+    }
+
+    public static function alreadyClaim(int $surveyId): ?Claim
+    {
+        return Claim::where('survey_id', $surveyId)
+            ->where('user_id', Auth::user()->id)
+            ->where('status_id', Status::NEW_REQUEST_ID)
+            ->first();
     }
 }
