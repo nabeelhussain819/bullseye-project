@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Exceptions\ApiException;
 use App\Observers\ClaimObservers;
+use App\Observers\SurveyObserver;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -57,5 +58,10 @@ class Survey extends Model
         Claim::observe(SurveyObserver::class);
     }
 
+
+    public static function current(): ?Survey
+    {
+        return Survey::where('active', true)->first();
+    }
 
 }

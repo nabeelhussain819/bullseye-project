@@ -72,6 +72,10 @@ Route::middleware('auth:api')->group(function () {
         Route::get('/statistics', [Api\ClaimController::class, 'statistics']);
     });
 
+    Route::group(['prefix' => 'survey'], function () {
+        Route::get('/current', [Api\SurveyController::class, 'current']);
+    });
+
     Route::apiResources([
         'claim' => Api\ClaimController::class,
     ]);
