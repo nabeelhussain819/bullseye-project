@@ -21,3 +21,8 @@ Route::middleware(['auth'])->prefix('app')->group(function () {
         'surveys' => \App\Http\Controllers\SurveyController::class,
     ]);
 });
+
+
+Route::get('/{any}', function () {
+    return view('index');
+})->where('any', '.*');

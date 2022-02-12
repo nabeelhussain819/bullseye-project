@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Claim;
+use App\Models\Survey;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -111,7 +112,8 @@ class ClaimController extends Controller
             'total' => 3,
             'pending' => 2,
             'completed' => 3,
-            'rejected' => 2
+            'rejected' => 2,
+            'current_survey' => Survey::currentWIthClaimDetail()
         ];
     }
 }

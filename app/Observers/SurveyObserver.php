@@ -8,15 +8,20 @@ class SurveyObserver
 {
     public function creating(Survey $survey)
     {
-        Survey::update([
+
+        $survey->active = true;
+        Survey::where("active", true)->update([
             'active' => false
         ]);
     }
 
     public function updating(Survey $survey)
     {
-        Survey::where('id', '!=', $survey->id)->update([
-            'active' => false
-        ]);
+        // this will only run if reactive the old survey
+        if ($survey->isDirty('active')) {
+            Survey::where("active", true)->update([
+                'active' => false
+            ]);
+        }
     }
 }

@@ -6,6 +6,7 @@ use App\Exceptions\ApiException;
 use App\Observers\ClaimObservers;
 use App\Observers\SurveyObserver;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * @property integer $id
@@ -55,13 +56,27 @@ class Survey extends Model
     {
         parent::boot();
 
-        Claim::observe(SurveyObserver::class);
+        Survey::observe(SurveyObserver::class);
     }
 
 
     public static function current(): ?Survey
     {
         return Survey::where('active', true)->first();
+    }
+
+    public static function currentWIthClaimDetail()
+    {
+        $survey = Survey::where('active', true)->first();
+        if (!empty($survey)) {
+            $claim = Claim::where('survey_id', $survey->id)
+                ->where('status_id', Status::NEW_REQUEST_ID)
+                ->where('user_id', User::id())->first();
+
+            $survey->isCLaim = !empty($claim);
+            return $survey;
+        }
+        return $survey;
     }
 
 }

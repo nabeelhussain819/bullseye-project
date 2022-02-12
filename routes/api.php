@@ -68,6 +68,10 @@ Route::middleware('auth:api')->group(function () {
 
     Route::get('/website-url', [LinkController::class, 'getNewLink']);
 
+    Route::group(['prefix' => 'user'], function () {
+        Route::get('/detail', [UserController::class, 'detail']);
+    });
+
     Route::group(['prefix' => 'claim'], function () {
         Route::get('/statistics', [Api\ClaimController::class, 'statistics']);
     });

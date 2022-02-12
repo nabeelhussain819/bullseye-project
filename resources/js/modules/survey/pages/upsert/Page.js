@@ -12,7 +12,7 @@ class Page extends Component {
 
         this.state = {
             survey: {},
-            url: "",
+            // url: "",
             showMessage: false,
             messageText: "",
             messageHeading: "",
@@ -36,7 +36,7 @@ class Page extends Component {
         //     alert("Please Enter the link for the url");
         //     return;
         // }
-        this.setState({ survey: {} }, () => {});
+
 
         SurveyService.post({ ...this.state.survey }).then(({ data }) => {
             this.getAllLinks();

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Helpers\Common;
 use App\Http\Resources\UserResource;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -82,5 +83,10 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function detail()
+    {
+        return User::where('id', Auth::user()->id)->get();
     }
 }
