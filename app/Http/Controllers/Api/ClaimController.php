@@ -4,21 +4,36 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Claim;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+
 
 class ClaimController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return  array
      */
     public function index(Request $request)
     {
-        return Claim::where($this->applyFilters($request))
+        // The data set is requirement of mobile app developer for there easy of use
+        $claims = Claim::where($this->applyFilters($request))
+            ->with('survey', function (BelongsTo $belongsTo) {
+                $belongsTo->select(['id', 'name']);
+            })
+            ->with('status', function (BelongsTo $belongsTo) {
+                $belongsTo->select(['id', 'name']);
+            })
             ->where('user_id', Auth::user()->id)
-            ->paginate($this->pageSize);
+            ->get()
+            ->map(function (Claim $claim) {
+                $claim->surveyName = $claim->survey->name;
+                $claim->statusName = $claim->status->name;
+                return $claim;
+            });
+        return ['data' => $claims];
     }
 
     /**

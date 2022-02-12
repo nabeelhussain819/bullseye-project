@@ -73,6 +73,12 @@ class Claim extends Model
             ->first();
     }
 
+    public function getSurveyNameAttribute($value)
+    {
+
+    }
+
+
     public static function statistics()
     {
 
