@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import SurveyService from "../../../../services/API/SurveyServices";
 
 import Message from "../../../../common/ui/Message";
+import { Link } from "react-router-dom";
 
 class Page extends Component {
     static displayName = "LinksPage";
@@ -24,29 +25,51 @@ class Page extends Component {
     }
     handleInputChange = (e) => {
         let survey = this.state.survey;
-
         survey[e.target.name] = e.target.value;
-
         this.setState({ survey });
     };
+
+    message = (status, text, heading, variant) => {
+        this.setState(
+            {
+                showMessage: status,
+                messageText: text,
+                messageHeading: heading,
+                messageVariant: variant,
+            },
+            () => {
+                setTimeout(() => {
+                    this.setState({
+                        showMessage: false,
+                        messageText: "",
+                        messageHeading: "",
+                        messageVariant: "",
+                    });
+                }, 3000);
+            }
+        );
+    };
+
     submitHandler = (e) => {
         e.preventDefault();
 
-        // if (this.state.url == "") {
-        //     alert("Please Enter the link for the url");
-        //     return;
-        // }
-
-
         SurveyService.post({ ...this.state.survey }).then(({ data }) => {
-            this.getAllLinks();
-            this.setState({ survey: {} });
-            this.message(
-                true,
-                "Previous Link has been disabled",
-                "Added Link",
-                "alert alert-success"
-            );
+            if (data.success) {
+                this.setState({ survey: {} });
+                this.message(
+                    true,
+                    "Previous Surveys has been disabled",
+                    "Added Survey",
+                    "alert alert-success"
+                );
+            } else {
+                this.message(
+                    true,
+                    "Please check if there is any field empty",
+                    "An Error Occured",
+                    "alert alert-danger"
+                );
+            }
         });
     };
 
@@ -81,10 +104,9 @@ class Page extends Component {
                                                     Name
                                                 </label>
                                             </div>
-                                            <div className="col-6 ">
+                                            <div className="col-6 mb-1">
                                                 <input
                                                     type="text"
-                                                    value={survey.name}
                                                     name="name"
                                                     onChange={
                                                         this.handleInputChange
@@ -93,16 +115,16 @@ class Page extends Component {
                                                 />
                                             </div>
 
-                                            <div className="col-6">
+                                            <div className="col-6 mb-1">
                                                 <label className="col-form-label">
                                                     Url Link
                                                 </label>
                                             </div>
-                                            <div className="col-6 ">
+                                            <div className="col-6 mb-1">
                                                 <input
                                                     type="text"
                                                     name="url"
-                                                    value={survey.url}
+                                                    required
                                                     name="url"
                                                     onChange={
                                                         this.handleInputChange
@@ -111,16 +133,15 @@ class Page extends Component {
                                                 />
                                             </div>
 
-                                            <div className="col-6">
+                                            <div className="col-6 mb-1">
                                                 <label className="col-form-label">
                                                     Description
                                                 </label>
                                             </div>
 
-                                            <div className="col-6">
+                                            <div className="col-6 mb-1">
                                                 <textarea
                                                     type="text"
-                                                    value={survey.description}
                                                     name="description"
                                                     onChange={
                                                         this.handleInputChange
@@ -128,10 +149,15 @@ class Page extends Component {
                                                     className="form-control"
                                                 />
                                             </div>
-
+                                            <Link
+                                                to="/survey"
+                                                className="btn btn-primary mr-1"
+                                            >
+                                                Back
+                                            </Link>
                                             <button
                                                 type="submit"
-                                                className="btn btn-primary"
+                                                className="btn btn-primary ml-2"
                                             >
                                                 Submit
                                             </button>
