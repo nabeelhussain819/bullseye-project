@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import SurveyService from "../../../../services/API/SurveyServices";
 import LinkRow from "./components/LinkRow";
 import Message from "../../../../common/ui/Message";
+import { Link } from "react-router-dom";
 
 class Page extends Component {
     static displayName = "LinksPage";
@@ -117,6 +118,12 @@ class Page extends Component {
         const { url } = this.state;
         return (
             <div className="container pt-5">
+                <Link
+                    to="/survey/create"
+                    className="btn btn-success mb-1 text-white"
+                >
+                    ADD NEW
+                </Link>
                 <div className="card ">
                     <div className="card-header">
                         <h1>Survey</h1>
@@ -134,45 +141,14 @@ class Page extends Component {
                                     ""
                                 )}
                             </div>
-                            <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                                <form onSubmit={this.submitHandler}>
-                                    <fieldset>
-                                        <legend>Create A New Link</legend>
-                                        <div className="row g-3 align-items-center">
-                                            <div className="col-auto">
-                                                <label className="col-form-label">
-                                                    Url Link
-                                                </label>
-                                            </div>
-                                            <div className="col-auto">
-                                                <input
-                                                    type="text"
-                                                    value={url}
-                                                    name="url"
-                                                    onChange={
-                                                        this.handleInputChange
-                                                    }
-                                                    className="form-control"
-                                                />
-                                            </div>
-
-                                            <button
-                                                type="submit"
-                                                className="btn btn-primary"
-                                            >
-                                                Submit
-                                            </button>
-                                        </div>
-                                    </fieldset>
-                                </form>
-                            </div>
-
-                            <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                            <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                 <table className="table table-responsive">
                                     <thead>
                                         <tr>
                                             <th scope="col">#</th>
-                                            <th scope="col">Url</th>
+                                            <th scope="col">Name</th>
+                                            <th scope="col">Url Link</th>
+                                            <th scope="col">Description</th>
                                             <th scope="col">Status</th>
                                             <th scope="col">Actions</th>
                                         </tr>
