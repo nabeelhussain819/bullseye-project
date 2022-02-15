@@ -12,15 +12,15 @@ function all(params = {}) {
 }
 
 function post(params = {}) {
-    return axios.post(baseUrl, params);
+    return axios.post(baseUrl + "/store", params);
 }
 
 function remove(params = {}) {
-    return axios.post(baseUrl + "/delete", params);
+    return axios.post(baseUrl + "/destroy", params);
 }
 
 function updateStatus(params = {}) {
-    return axios.post(baseUrl + "/update-status", params);
+    return axios.post(baseUrl + "/update", params);
 }
 
 const UserService = {
