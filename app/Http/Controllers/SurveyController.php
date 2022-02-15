@@ -48,22 +48,15 @@ class SurveyController extends Controller
      */
     public function store(Request $request)
     {
-        return DB::transaction(function () use ($request) {
-            return Survey::create($request->all());
+        $survey =  DB::transaction(function () use ($request) {
+            return Survey::create([
+                'name' => $request->name,
+                'description' => $request->description,
+                'url' => $request->url,
+            ]);
         });
-
-//        $validate = $this->validator($request->all());
-//
-//        if ($validate->fails()) {
-//            return Common::sendError('Some Error Occured', $validate->errors());
-//        }
-//
-//        $survey = $this->model::create([
-//            'title' => $request->get('title'),
-//            'description' => $request->get('description')
-//        ]);
-//
-//        return Common::sendResponse($survey, 'Successfully Added !');
+     
+        return Common::sendResponse($survey, 'Successfully Added !');
     }
 
     /**
@@ -95,9 +88,15 @@ class SurveyController extends Controller
      * @param \App\Models\Survey $survey
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Survey $survey)
+    public function update(Request $request)
     {
         //
+        $survey = Survey::findOrFail($request->id);
+        $survey->update([
+            'active' => true,
+        ]);
+        return Common::sendResponse([],'Successfully Updated Status');
+
     }
 
     /**
@@ -106,9 +105,12 @@ class SurveyController extends Controller
      * @param \App\Models\Survey $survey
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Survey $survey)
+    public function destroy(Request $request)
     {
         //
+        $survey = Survey::findOrFail($request->id);
+        $survey->delete();
+        return Common::sendResponse([],'Successfully deleted Survey');
     }
 
     public function validator(array $data)
@@ -118,4 +120,6 @@ class SurveyController extends Controller
             'description' => 'sometimes|string',
         ]);
     }
+    
+    
 }
