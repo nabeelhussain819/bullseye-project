@@ -19,7 +19,9 @@ const LinkRow = ({ link, index, handleDelete, handleStatusChange }) => {
         <tr>
             <td>{index + 1}</td>
             <td>{link.name}</td>
-            <td>{badge(link.expired)}</td>
+            <td>{link.url}</td>
+            <td>{link.description}</td>
+            <td>{badge(link.active)}</td>
             <td>
                 <button
                     className="btn btn-danger"
