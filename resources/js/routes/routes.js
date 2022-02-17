@@ -6,6 +6,7 @@ import articleRoutes from "../modules/article/routes";
 import consumerRoutes from "../modules/consumers/route";
 import linkRoutes from "../modules/links/route";
 import surveyRoutes from "../modules/survey/route";
+import claimsRoutes from "../modules/claims/route";
 
 export default [
     ...webRoutes,
@@ -15,4 +16,5 @@ export default [
     ...consumerRoutes,
     ...linkRoutes,
     ...surveyRoutes,
+    ...claimsRoutes,
 ];
