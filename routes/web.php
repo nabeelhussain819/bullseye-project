@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ClaimController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,8 +25,9 @@ Route::middleware(['auth'])->prefix('app')->group(function () {
     Route::post('surveys/update', [\App\Http\Controllers\SurveyController::class, 'update'])->name('survey.update');
     Route::post('surveys/store', [\App\Http\Controllers\SurveyController::class, 'store'])->name('survey.store');
 
+    Route::get('claims',[ClaimController::class, 'index'])->name('claim.index');
+    Route::post('claims/update',[ClaimController::class,'update'])->name('claim.update');
 });
-
 
 Route::get('/{any}', function () {
     return view('index');
