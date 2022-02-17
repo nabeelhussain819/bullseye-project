@@ -27,6 +27,7 @@ export default function PrivateHeader({
                 <NavItem path="/consumers">Consumers</NavItem>
                 {/* <NavItem path="/links">Links</NavItem> */}
                 <NavItem path="/survey">Survey</NavItem>
+                <NavItem path="/claims">Claims</NavItem>
             </ul>
 
             <ul className="navbar-nav">
