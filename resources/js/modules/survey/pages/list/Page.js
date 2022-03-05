@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import SurveyService from "../../../../services/API/SurveyServices";
-import LinkRow from "./components/LinkRow";
+import SurveyRow from "./components/SurveyRow";
 import Message from "../../../../common/ui/Message";
 import { Link } from "react-router-dom";
 
@@ -22,8 +22,6 @@ class Page extends Component {
     }
 
     async componentDidMount() {
-        const { dispatch } = this.props;
-
         await this.getAllLinks();
     }
 
@@ -87,15 +85,11 @@ class Page extends Component {
     };
 
     handleDelete = async (id) => {
+        confirm("Are you sure you want to remove ?");
         await SurveyService.remove({ id: id })
             .then(({ data }) => {
                 this.getAllLinks();
-                this.message(
-                    true,
-                    "Link Has Been removed",
-                    "Removed Link",
-                    "alert alert-success"
-                );
+                this.message(true, "", data.message, "alert alert-success");
             })
             .catch(() => {});
     };
@@ -104,12 +98,7 @@ class Page extends Component {
         await SurveyService.updateStatus({ id: id })
             .then(({ data }) => {
                 this.getAllLinks();
-                this.message(
-                    true,
-                    "Link Now Current Active Link",
-                    "Link Status Changed",
-                    "alert alert-success"
-                );
+                this.message(true, "", data.message, "alert alert-success");
             })
             .catch(() => {});
     };
@@ -157,7 +146,7 @@ class Page extends Component {
                                         {this.state.surveys.map(
                                             (link, index) => {
                                                 return (
-                                                    <LinkRow
+                                                    <SurveyRow
                                                         key={index}
                                                         link={link}
                                                         index={index}

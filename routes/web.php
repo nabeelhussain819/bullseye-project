@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\ClaimController;
 use Illuminate\Support\Facades\Route;
 
@@ -27,6 +28,8 @@ Route::middleware(['auth'])->prefix('app')->group(function () {
 
     Route::get('claims',[ClaimController::class, 'index'])->name('claim.index');
     Route::post('claims/update',[ClaimController::class,'update'])->name('claim.update');
+    Route::get('consumer/{id}', [UserController::class, 'show'])->name('consumer.show');
+    Route::get('consumer-details/{id}',[UserController::class,'getUserDetails'])->name('get-consumer-details');
 });
 
 Route::get('/{any}', function () {

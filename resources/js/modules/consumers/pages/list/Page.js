@@ -75,6 +75,7 @@ class Page extends Component {
                                     <th>Chief Earner</th>
                                     <th>Chief Earner Occupation</th>
                                     <th>Chief Earner Designation</th>
+                                    <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>{this.renderConsumers()}</tbody>
