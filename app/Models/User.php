@@ -59,12 +59,18 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'created_at' => 'datetime:d/M/Y',
         'otp_verified_at' => 'datetime'
     ];
 
     public function otp()
     {
         return $this->hasOne(Otp::class, 'user_id');
+    }
+
+    public function claims()
+    {
+        return $this->hasMany(Claim::class, 'user_id');
     }
 
     static function generateOtp($user, $otpType = Otp::REGISTRATION_OTP)
