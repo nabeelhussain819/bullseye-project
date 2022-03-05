@@ -16,6 +16,7 @@ class User extends Authenticatable
     public const VERIFIED = 1;
     public const NOT_VERIFIED = 0;
     public const ADMIN = 1;
+    public const ADMIN_EMAIL = "superadmin@admin.com";
 
     /**
      * The attributes that are mass assignable.
@@ -94,5 +95,10 @@ class User extends Authenticatable
     public static function id()
     {
         return Auth::user()->id;
+    }
+
+    public function scopeRemoveAdmin($query)
+    {
+        $query->where("email", "!=" , self::ADMIN_EMAIL);
     }
 }

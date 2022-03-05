@@ -16,7 +16,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        return UserResource::collection(User::where("email", "!=", "superadmin@admin.com")->paginate());
+        return UserResource::collection(User::removeAdmin()->paginate());
     }
 
     /**
