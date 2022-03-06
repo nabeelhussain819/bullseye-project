@@ -80,6 +80,10 @@ Route::middleware('auth:api')->group(function () {
         Route::get('/current', [Api\SurveyController::class, 'current']);
     });
 
+    Route::post('/firebase/save-token', [\App\Http\Controllers\FirebaseController::class, 'store'])->name('save-token');
+    Route::post('/firebase/send-notification', [App\Http\Controllers\FirebaseController::class, 'sendNotification'])->name('send.notification');
+
+
     Route::apiResources([
         'claim' => Api\ClaimController::class,
     ]);
