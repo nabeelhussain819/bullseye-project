@@ -1,41 +1,36 @@
 import React, { Component } from "react";
-import SurveyService from "../../../../services/API/SurveyServices";
-import SurveyRow from "./components/SurveyRow";
+import ClaimService from "../../../../services/API/ClaimService";
+import Row from "./components/Row";
 import Message from "../../../../common/ui/Message";
 import { Link } from "react-router-dom";
 
 class Page extends Component {
-    static displayName = "LinksPage";
+    static displayName = "ClaimsPage";
     static propTypes = {};
 
     constructor(props) {
         super(props);
 
         this.state = {
-            surveys: [],
-            url: "",
-            showMessage: false,
-            messageText: "",
-            messageHeading: "",
-            messageVariant: "",
+            claims: [],
         };
     }
 
     async componentDidMount() {
-        await this.getAllLinks();
+        await this.getAllClaims();
     }
 
-    getAllLinks = async () => {
-        await SurveyService.all().then((surveys) => {
+    getAllClaims = async () => {
+        await ClaimService.all().then((claims) => {
             this.setState({
-                surveys: surveys.data,
+                claims: claims.data,
             });
         });
     };
 
-    handleInputChange = (e) => {
-        this.setState({ [e.target.name]: e.target.value });
-    };
+    // handleInputChange = (e) => {
+    //      this.setState({ [e.target.name]: e.target.value });
+    // };
 
     submitHandler = (e) => {
         e.preventDefault();
@@ -44,17 +39,6 @@ class Page extends Component {
             alert("Please Enter the link for the url");
             return;
         }
-
-        SurveyService.post({ url: this.state.url }).then(({ data }) => {
-            this.getAllLinks();
-            this.resetInput();
-            this.message(
-                true,
-                "Previous Link has been disabled",
-                "Added Link",
-                "alert alert-success"
-            );
-        });
     };
 
     message = (status, text, heading, variant) => {
@@ -84,21 +68,20 @@ class Page extends Component {
         });
     };
 
-    handleDelete = async (id) => {
-        confirm("Are you sure you want to remove ?");
-        await SurveyService.remove({ id: id })
+    handleReject = async (id, status) => {
+        await ClaimService.update({ id: id, status: status })
             .then(({ data }) => {
-                this.getAllLinks();
-                this.message(true, "", data.message, "alert alert-success");
+                this.getAllClaims();
+                this.message(true, "Rejected Claim", "", "alert alert-success");
             })
             .catch(() => {});
     };
 
-    handleStatusChange = async (id) => {
-        await SurveyService.updateStatus({ id: id })
+    handleAccept = async (id, status) => {
+        await ClaimService.update({ id: id, status: status })
             .then(({ data }) => {
-                this.getAllLinks();
-                this.message(true, "", data.message, "alert alert-success");
+                this.getAllClaims();
+                this.message(true, "Accepted Claim", "", "alert alert-success");
             })
             .catch(() => {});
     };
@@ -107,15 +90,9 @@ class Page extends Component {
         const { url } = this.state;
         return (
             <div className="container pt-5">
-                <Link
-                    to="/survey/create"
-                    className="btn btn-success mb-1 text-white"
-                >
-                    ADD NEW
-                </Link>
                 <div className="card ">
                     <div className="card-header">
-                        <h1>Survey</h1>
+                        <h1>Claims</h1>
                     </div>
                     <div className="card-body">
                         <div className="row">
@@ -135,27 +112,27 @@ class Page extends Component {
                                     <thead>
                                         <tr>
                                             <th scope="col">#</th>
-                                            <th scope="col">Name</th>
-                                            <th scope="col">Url Link</th>
-                                            <th scope="col">Description</th>
-                                            <th scope="col">Status</th>
+                                            <th scope="col">Consumer Name</th>
+                                            <th scope="col">Survey Name</th>
+                                            <th scope="col">Survey Link</th>
+                                            <th scope="col">Date</th>
+                                            <th scope="col">Claim Status</th>
                                             <th scope="col">Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {this.state.surveys.map(
-                                            (link, index) => {
+                                        {this.state.claims.map(
+                                            (claim, index) => {
                                                 return (
-                                                    <SurveyRow
+                                                    <Row
                                                         key={index}
-                                                        link={link}
+                                                        claim={claim}
                                                         index={index}
-                                                        handleDelete={
-                                                            this.handleDelete
+                                                        handleAccept={
+                                                            this.handleAccept
                                                         }
-                                                        handleStatusChange={
-                                                            this
-                                                                .handleStatusChange
+                                                        handleReject={
+                                                            this.handleReject
                                                         }
                                                     />
                                                 );

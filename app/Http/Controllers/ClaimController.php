@@ -1,22 +1,23 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Helpers\Common;
-use App\Http\Resources\UserResource;
-use App\Models\User;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Resources\ClaimResource;
+use App\Models\Claim;
+use Illuminate\Http\Request;
 
-class UserController extends Controller
+class ClaimController extends Controller
 {
     /**
-     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        return UserResource::collection(User::removeAdmin()->paginate());
+        //
+        return ClaimResource::collection(Claim::with('survey','user','status')->latest()->get());
     }
 
     /**
@@ -32,7 +33,7 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -43,7 +44,7 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param int $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -54,7 +55,7 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param int $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -65,28 +66,29 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param int $id
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
         //
+        $claim = Claim::findOrFail($request->get('id'));
+        $claim->update([
+            'status_id' => $request->status
+        ]);
+
+        return Common::sendResponse([],'Successfully Updated Claim');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param int $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
         //
-    }
-
-    public function detail()
-    {
-        return User::where('id', Auth::user()->id)->get();
     }
 }

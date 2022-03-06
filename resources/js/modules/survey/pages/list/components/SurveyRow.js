@@ -1,4 +1,7 @@
-const LinkRow = ({ link, index, handleDelete, handleStatusChange }) => {
+import PropTypes from "prop-types";
+import { FaTrash } from "react-icons/fa";
+
+const SurveyRow = ({ link, index, handleDelete, handleStatusChange }) => {
     let badge = (status) => {
         return (
             <span
@@ -27,11 +30,18 @@ const LinkRow = ({ link, index, handleDelete, handleStatusChange }) => {
                     className="btn btn-danger"
                     onClick={() => handleDelete(link.id)}
                 >
-                    DELETE
+                    <FaTrash />
                 </button>
             </td>
         </tr>
     );
 };
 
-export default LinkRow;
+SurveyRow.propType = {
+    link: PropTypes.string.isRequired,
+    index: PropTypes.number.isRequired,
+    handleDelete: PropTypes.func.isRequired,
+    handleStatusChange: PropTypes.func.isRequired,
+};
+
+export default SurveyRow;

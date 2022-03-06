@@ -1,3 +1,6 @@
+import { useState } from "react";
+import PropTypes from "prop-types";
+
 const Message = ({ heading, text, variant }) => {
     return (
         <div className={variant}>
@@ -6,6 +9,12 @@ const Message = ({ heading, text, variant }) => {
             <p className="mb-0">{text}</p>
         </div>
     );
+};
+
+Message.propTypes = {
+    heading: PropTypes.string.isRequired,
+    text: PropTypes.string.isRequired,
+    variant: PropTypes.string.isRequired,
 };
 
 export default Message;

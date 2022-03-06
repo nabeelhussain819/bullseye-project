@@ -1,17 +1,32 @@
-import * as constants from '../Constant'
-import request from '../request'
+import * as constants from "../Constant";
+import request from "../request";
 
 const baseUrl = `${constants.BASE_API}users`;
 
 function all(params = {}) {
     return request({
         url: baseUrl,
-        params
-    })
+        params,
+    });
+}
+
+function single(id, params = {}) {
+    return request({
+        url: `${constants.BASE_APP}consumer/${id}`,
+        params,
+    });
+}
+
+function getSurveys(id, params = {}) {
+    return request({
+        url: `${constants.BASE_APP}consumer-details/${id}`,
+    });
 }
 
 const UserService = {
-    all
+    all,
+    single,
+    getSurveys,
 };
 
-export default UserService
+export default UserService;

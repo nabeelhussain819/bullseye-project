@@ -10,15 +10,6 @@ use Illuminate\Support\Facades\Validator;
 
 class SurveyController extends Controller
 {
-    private $model;
-
-    /**
-     * Constructor
-     *
-     *
-     */
-
-
     /**
      * Display a listing of the resource.
      *
@@ -108,8 +99,11 @@ class SurveyController extends Controller
     public function destroy(Request $request)
     {
         //
-        $survey = Survey::findOrFail($request->id);
-        $survey->delete();
+        $survey = Survey::with('claims')->findOrFail($request->id);
+        if($survey->claims->count() > 0)
+        {
+            return Common::sendResponse([], 'Cannot Delete survey because it has claims');   
+        }
         return Common::sendResponse([],'Successfully deleted Survey');
     }
 

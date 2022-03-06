@@ -2,6 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\Common;
+use App\Models\Claim;
+use App\Models\Status;
+use App\Models\Survey;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -25,4 +30,20 @@ class HomeController extends Controller
     {
         return view('home');
     }
+
+
+    public function getCounts()
+    {
+        $count = [
+            'consumers' => User::removeAdmin()->count(),
+            'surveys' => Survey::all()->count(),
+            'claims' => Claim::all()->count(),
+            'rejected_claims' => Claim::where('status_id', Status::STATUS_DECLINED_ID)->count(),
+            'pending_claims' => Claim::where('status_id', Status::NEW_REQUEST_ID)->count(),
+            'approved_claims' => Claim::where('status_id', Status::STATUS_APPROVED_ID)->count()
+        ];
+        
+        return Common::sendResponse($count, 'Success');
+    }
+
 }

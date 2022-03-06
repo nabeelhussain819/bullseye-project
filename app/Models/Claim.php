@@ -44,6 +44,15 @@ class Claim extends Model
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+    */
+    public function acceptedBy()
+    {
+        return $this->belongsTo(User::class, 'accepted_by', 'id');
+    }    
+    
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function survey()
     {

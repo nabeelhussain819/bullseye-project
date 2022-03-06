@@ -16,6 +16,7 @@ class User extends Authenticatable
     public const VERIFIED = 1;
     public const NOT_VERIFIED = 0;
     public const ADMIN = 1;
+    public const ADMIN_EMAIL = "superadmin@admin.com";
 
     /**
      * The attributes that are mass assignable.
@@ -59,12 +60,18 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'created_at' => 'datetime:d/M/Y',
         'otp_verified_at' => 'datetime'
     ];
 
     public function otp()
     {
         return $this->hasOne(Otp::class, 'user_id');
+    }
+
+    public function claims()
+    {
+        return $this->hasMany(Claim::class, 'user_id');
     }
 
     static function generateOtp($user, $otpType = Otp::REGISTRATION_OTP)
@@ -88,5 +95,10 @@ class User extends Authenticatable
     public static function id()
     {
         return Auth::user()->id;
+    }
+
+    public function scopeRemoveAdmin($query)
+    {
+        $query->where("email", "!=" , self::ADMIN_EMAIL);
     }
 }
