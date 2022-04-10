@@ -3,7 +3,7 @@
 namespace App\Traits;
 
 use App\Http\Controllers\Controller;
-use App\Model\FirebaseToken;
+use App\Models\FirebaseToken;
 use PHPUnit\Exception;
 
 trait InteractWithFirebase

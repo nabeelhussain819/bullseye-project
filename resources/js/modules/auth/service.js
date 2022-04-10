@@ -1,6 +1,6 @@
-import Http from '../../utils/Http'
-import * as authActions from './store/actions'
-import Transformer from '../../utils/Transformer'
+import Http from "../../utils/Http";
+import * as authActions from "./store/actions";
+import Transformer from "../../utils/Transformer";
 
 /**
  * fetch the current logged in user
@@ -8,16 +8,16 @@ import Transformer from '../../utils/Transformer'
  * @returns {function(*)}
  */
 export function fetchUser() {
-  return dispatch => {
-    return Http.get('api/v1/auth/me')
-      .then(res => {
-        const data = Transformer.fetch(res.data)
-        dispatch(authActions.authUser(data))
-      })
-      .catch(err => {
-        console.log(err)
-      })
-  }
+    return (dispatch) => {
+        return Http.get("api/v1/auth/me")
+            .then((res) => {
+                const data = Transformer.fetch(res.data);
+                dispatch(authActions.authUser(data));
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    };
 }
 
 /**
@@ -27,73 +27,72 @@ export function fetchUser() {
  * @returns {function(*)}
  */
 export function login(credentials) {
-  return dispatch => (
-    new Promise((resolve, reject) => {
-      Http.get('sanctum/csrf-cookie')
-        .then(() => {
-          Http.post('login', credentials)
-            .then(res => {
-              const data = Transformer.fetch(res.data)
-              dispatch(authActions.authLogin(data.accessToken))
-              return resolve()
-            })
-            .catch((err) => {
-              const statusCode = err.response.status;
-              const data = {
-                error: null,
-                statusCode,
-              };
+    return (dispatch) =>
+        new Promise((resolve, reject) => {
+            Http.get("sanctum/csrf-cookie").then(() => {
+                Http.post("login", credentials)
+                    .then((res) => {
+                        const data = Transformer.fetch(res.data);
+                        dispatch(authActions.authLogin(data.accessToken));
+                        return resolve();
+                    })
+                    .catch((err) => {
+                        const statusCode = err.response.status;
+                        const data = {
+                            error: null,
+                            statusCode,
+                        };
 
-              if (statusCode === 422) {
-                const resetErrors = {
-                  errors: err.response.data.errors,
-                  replace: false,
-                  searchStr: '',
-                  replaceStr: '',
-                };
-                data.error = Transformer.resetValidationFields(resetErrors);
-              } else if (statusCode === 401) {
-                data.error = err.response.data.message;
-              }
-              return reject(data);
-            })
-        })
-    })
-  )
+                        if (statusCode === 422) {
+                            const resetErrors = {
+                                errors: err.response.data.errors,
+                                replace: false,
+                                searchStr: "",
+                                replaceStr: "",
+                            };
+                            data.error =
+                                Transformer.resetValidationFields(resetErrors);
+                        } else if (statusCode === 401) {
+                            data.error = err.response.data.message;
+                        }
+                        return reject(data);
+                    });
+            });
+        });
 }
 
 export function register(credentials) {
-  return dispatch => (
-    new Promise((resolve, reject) => {
-      Http.post('register', Transformer.send(credentials))
-        .then(res => {
-          const data = Transformer.fetch(res.data)
-          dispatch(authActions.authLogin(data.accessToken))
-          return resolve()
-        })
-        .catch((err) => {
-          const statusCode = err.response.status;
-          const data = {
-            error: null,
-            statusCode,
-          };
+    return (dispatch) =>
+        new Promise((resolve, reject) => {
+            Http.post("register", Transformer.send(credentials))
+                .then((res) => {
+                    const data = Transformer.fetch(res.data);
+                    dispatch(authActions.authLogin(data.accessToken));
+                    return resolve();
+                })
+                .catch((err) => {
+                    const statusCode = err.response.status;
+                    const data = {
+                        error: null,
+                        statusCode,
+                    };
 
-          if (statusCode === 422) {
-            const resetErrors = {
-              errors: err.response.data.errors,
-              replace: false,
-              searchStr: '',
-              replaceStr: '',
-            };
-            data.error = Transformer.resetValidationFields(resetErrors);
-          } else if (statusCode === 401) {
-            data.error = err.response.data.message;
-          }
-          console.log(data)
-          return reject(data);
-        })
-    })
-  )
+                    if (statusCode === 422) {
+                        const resetErrors = {
+                            errors: err.response.data.errors,
+                            replace: false,
+                            searchStr: "",
+                            replaceStr: "",
+                        };
+                        data.error =
+                            Transformer.resetValidationFields(resetErrors);
+                    } else if (statusCode === 401) {
+                        data.error = err.response.data.message;
+                    }
+                    console.log(data);
+                    return reject(data);
+                });
+        });
 }
 
 /**
@@ -102,13 +101,13 @@ export function register(credentials) {
  * @returns {function(*)}
  */
 export function logout() {
-  return dispatch => {
-    return Http.post('logout')
-      .then(() => {
-        dispatch(authActions.authLogout())
-      })
-      .catch(err => {
-        console.log(err)
-      })
-  }
+    return (dispatch) => {
+        return Http.post("logout")
+            .then(() => {
+                dispatch(authActions.authLogout());
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    };
 }
