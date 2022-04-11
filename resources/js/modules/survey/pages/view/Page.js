@@ -1,61 +1,36 @@
+// import libs
 import React, { Component } from "react";
-import SurveyService from "../../../../services/API/SurveyServices";
-import SurveyRow from "./components/SurveyRow";
-import Message from "../../../../common/ui/Message";
+import PropTypes from "prop-types";
+
 import { Link } from "react-router-dom";
 
+import ClaimRow from "./components/ClaimRow";
+import ClaimService from "../../../../services/API/ClaimService";
+
 class Page extends Component {
-    static displayName = "LinksPage";
-    static propTypes = {};
+    static displayName = "ClaimPage";
 
     constructor(props) {
         super(props);
 
         this.state = {
-            surveys: [],
-            url: "",
-            showMessage: false,
-            messageText: "",
-            messageHeading: "",
-            messageVariant: "",
+            claims: [],
         };
     }
 
     async componentDidMount() {
-        await this.getAllLinks();
-    }
+        const id = this.props.match.params.id;
 
-    getAllLinks = async () => {
-        await SurveyService.all().then((surveys) => {
-            this.setState({
-                surveys: surveys.data,
+        await ClaimService.single(id)
+            .then(({ data }) => {
+                this.setState({
+                    claims: data.data,
+                });
+            })
+            .catch((e) => {
+                console.log(e);
             });
-        });
-    };
-
-    handleInputChange = (e) => {
-        this.setState({ [e.target.name]: e.target.value });
-    };
-
-    submitHandler = (e) => {
-        e.preventDefault();
-
-        if (this.state.url == "") {
-            alert("Please Enter the link for the url");
-            return;
-        }
-
-        SurveyService.post({ url: this.state.url }).then(({ data }) => {
-            this.getAllLinks();
-            this.resetInput();
-            this.message(
-                true,
-                "Previous Link has been disabled",
-                "Added Link",
-                "alert alert-success"
-            );
-        });
-    };
+    }
 
     message = (status, text, heading, variant) => {
         this.setState(
@@ -78,27 +53,20 @@ class Page extends Component {
         );
     };
 
-    resetInput = () => {
-        this.setState({
-            url: "",
-        });
-    };
-
-    handleDelete = async (id) => {
-        confirm("Are you sure you want to remove ?");
-        await SurveyService.remove({ id: id })
+    handleReject = async (id, status) => {
+        await ClaimService.update({ id: id, status: status })
             .then(({ data }) => {
-                this.getAllLinks();
-                this.message(true, "", data.message, "alert alert-success");
+                this.getAllClaims();
+                this.message(true, "Rejected Claim", "", "alert alert-success");
             })
             .catch(() => {});
     };
 
-    handleStatusChange = async (id) => {
-        await SurveyService.updateStatus({ id: id })
+    handleAccept = async (id, status) => {
+        await ClaimService.update({ id: id, status: status })
             .then(({ data }) => {
-                this.getAllLinks();
-                this.message(true, "", data.message, "alert alert-success");
+                this.getAllClaims();
+                this.message(true, "Accepted Claim", "", "alert alert-success");
             })
             .catch(() => {});
     };
@@ -107,15 +75,12 @@ class Page extends Component {
         const { url } = this.state;
         return (
             <div className="container pt-5">
-                <Link
-                    to="/survey/create"
-                    className="btn btn-success mb-1 text-white"
-                >
-                    ADD NEW
+                <Link to="/survey" className="btn btn-primary mb-1 ">
+                    GO BACK
                 </Link>
                 <div className="card ">
                     <div className="card-header">
-                        <h1>Survey</h1>
+                        <h1>Claims</h1>
                     </div>
                     <div className="card-body">
                         <div className="row">
@@ -136,29 +101,33 @@ class Page extends Component {
                                         <thead>
                                             <tr>
                                                 <th scope="col">#</th>
-                                                <th scope="col">Name</th>
-                                                <th scope="col">Url Link</th>
-                                                <th scope="col">Description</th>
-                                                <th scope="col">Status</th>
-                                                <th scope="col">Actions</th>
-                                                <th scope="col">Claims</th>
+                                                <th scope="col">
+                                                    Consumer Name
+                                                </th>
+                                                <th scope="col">Survey Name</th>
+                                                <th scope="col">Survey Link</th>
+                                                <th scope="col">Date</th>
+                                                <th scope="col">
+                                                    Claim Status
+                                                </th>
+                                                {/* <th scope="col">Actions</th> */}
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {this.state.surveys.map(
-                                                (link, index) => {
+                                            {this.state.claims.map(
+                                                (claim, index) => {
                                                     return (
-                                                        <SurveyRow
+                                                        <ClaimRow
                                                             key={index}
-                                                            link={link}
+                                                            claim={claim}
                                                             index={index}
-                                                            handleDelete={
+                                                            handleAccept={
                                                                 this
-                                                                    .handleDelete
+                                                                    .handleAccept
                                                             }
-                                                            handleStatusChange={
+                                                            handleReject={
                                                                 this
-                                                                    .handleStatusChange
+                                                                    .handleReject
                                                             }
                                                         />
                                                     );

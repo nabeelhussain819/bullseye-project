@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import { FaTrash } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const SurveyRow = ({ link, index, handleDelete, handleStatusChange }) => {
     let badge = (status) => {
@@ -33,6 +34,16 @@ const SurveyRow = ({ link, index, handleDelete, handleStatusChange }) => {
                     <FaTrash />
                 </button>
             </td>
+            <td>
+                <Link
+                    to={`/survey/claims/${link.id}`}
+                    className="btn btn-success btn-sm"
+                    style={{ fontWeight: "bolder" }}
+                >
+                    Details
+                </Link>
+            </td>
+            <td></td>
         </tr>
     );
 };

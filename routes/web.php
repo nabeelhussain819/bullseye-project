@@ -31,6 +31,7 @@ Route::middleware(['auth'])->prefix('app')->group(function () {
     // claims start
     Route::get('claims',[ClaimController::class, 'index'])->name('claim.index');
     Route::post('claims/update',[ClaimController::class,'update'])->name('claim.update');
+    Route::get('claims/view/{id}',[ClaimController::class, 'show'])->name('claim.show');
     // claims end
 
     // consumer start

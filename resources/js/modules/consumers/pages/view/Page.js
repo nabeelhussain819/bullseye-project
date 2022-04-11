@@ -72,7 +72,7 @@ class Page extends Component {
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
+                                            <tr style={{ fontSize: "1rem" }}>
                                                 <td>
                                                     {this.state.consumer?.id}
                                                 </td>
@@ -115,7 +115,7 @@ class Page extends Component {
                             {this.state.consumer?.name} Claims
                             <div className="card-body">
                                 <div className="table-responsive">
-                                    <table className="table  table-fixed">
+                                    <table className="table table-fixed">
                                         <thead className="">
                                             <tr>
                                                 <th>S No. </th>

@@ -50,6 +50,7 @@ class ClaimController extends Controller
     public function show($id)
     {
         //
+        return ClaimResource::collection(Claim::with('survey','user','status')->where('survey_id',$id)->get());
     }
 
     /**

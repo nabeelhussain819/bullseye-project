@@ -10,6 +10,11 @@ function all(params = {}) {
         params,
     });
 }
+
+function single(id) {
+    return axios.get(`${BASE_URL}/view/${id}`);
+}
+
 function post(params = {}) {
     return axios.post(BASE_URL + "/update", params);
 }
@@ -22,6 +27,7 @@ const ClaimService = {
     all,
     update,
     post,
+    single,
 };
 
 export default ClaimService;
