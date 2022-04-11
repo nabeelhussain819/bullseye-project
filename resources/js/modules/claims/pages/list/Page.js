@@ -108,38 +108,46 @@ class Page extends Component {
                                 )}
                             </div>
                             <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                <table className="table table-responsive">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">#</th>
-                                            <th scope="col">Consumer Name</th>
-                                            <th scope="col">Survey Name</th>
-                                            <th scope="col">Survey Link</th>
-                                            <th scope="col">Date</th>
-                                            <th scope="col">Claim Status</th>
-                                            <th scope="col">Actions</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {this.state.claims.map(
-                                            (claim, index) => {
-                                                return (
-                                                    <Row
-                                                        key={index}
-                                                        claim={claim}
-                                                        index={index}
-                                                        handleAccept={
-                                                            this.handleAccept
-                                                        }
-                                                        handleReject={
-                                                            this.handleReject
-                                                        }
-                                                    />
-                                                );
-                                            }
-                                        )}
-                                    </tbody>
-                                </table>
+                                <div className="table-responsive">
+                                    <table className="table ">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">
+                                                    Consumer Name
+                                                </th>
+                                                <th scope="col">Survey Name</th>
+                                                <th scope="col">Survey Link</th>
+                                                <th scope="col">Date</th>
+                                                <th scope="col">
+                                                    Claim Status
+                                                </th>
+                                                <th scope="col">Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {this.state.claims.map(
+                                                (claim, index) => {
+                                                    return (
+                                                        <Row
+                                                            key={index}
+                                                            claim={claim}
+                                                            index={index}
+                                                            handleAccept={
+                                                                this
+                                                                    .handleAccept
+                                                            }
+                                                            handleReject={
+                                                                this
+                                                                    .handleReject
+                                                            }
+                                                        />
+                                                    );
+                                                }
+                                            )}
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>

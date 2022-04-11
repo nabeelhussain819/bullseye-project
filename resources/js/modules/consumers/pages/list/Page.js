@@ -58,28 +58,30 @@ class Page extends Component {
                         </h1>
                     </div>
                     <div className="card-body">
-                        <table className="table table-responsive table-striped">
-                            <thead className="thead-inverse">
-                                <tr>
-                                    <th>#</th>
-                                    <th>Name</th>
-                                    <th>Email</th>
-                                    <th>Cell Number Primary</th>
-                                    <th>Cell Number Secondary</th>
-                                    <th>Cnic</th>
-                                    <th>Gender</th>
-                                    <th>City</th>
-                                    <th>Qualification</th>
-                                    <th>Designation</th>
-                                    <th>Occupation</th>
-                                    <th>Chief Earner</th>
-                                    <th>Chief Earner Occupation</th>
-                                    <th>Chief Earner Designation</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>{this.renderConsumers()}</tbody>
-                        </table>
+                        <div className="table-responsive">
+                            <table className="table table-striped">
+                                <thead className="thead-inverse">
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Name</th>
+                                        <th style={{ width: "16%" }}>Email</th>
+                                        <th>Cell Number Primary</th>
+                                        <th>Cell Number Secondary</th>
+                                        <th>Cnic</th>
+                                        <th>Gender</th>
+                                        <th>City</th>
+                                        <th>Qualification</th>
+                                        <th>Designation</th>
+                                        <th>Occupation</th>
+                                        <th>Chief Earner</th>
+                                        <th>Chief Earner Occupation</th>
+                                        <th>Chief Earner Designation</th>
+                                        <th colSpan={3}>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>{this.renderConsumers()}</tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>

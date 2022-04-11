@@ -45,7 +45,7 @@ const Row = ({ claim, index, handleReject, handleAccept }) => {
             <td>
                 {claim.status_id == NEW_REQUEST_ID ||
                 claim.status_id == STATUS_CONFIRMED_ID ? (
-                    <div>
+                    <div style={{ display: "flex" }}>
                         <button
                             onClick={() =>
                                 handleReject(claim.id, STATUS_DECLINED_ID)

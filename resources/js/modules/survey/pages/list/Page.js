@@ -131,38 +131,41 @@ class Page extends Component {
                                 )}
                             </div>
                             <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                <table className="table table-responsive">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">#</th>
-                                            <th scope="col">Name</th>
-                                            <th scope="col">Url Link</th>
-                                            <th scope="col">Description</th>
-                                            <th scope="col">Status</th>
-                                            <th scope="col">Actions</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {this.state.surveys.map(
-                                            (link, index) => {
-                                                return (
-                                                    <SurveyRow
-                                                        key={index}
-                                                        link={link}
-                                                        index={index}
-                                                        handleDelete={
-                                                            this.handleDelete
-                                                        }
-                                                        handleStatusChange={
-                                                            this
-                                                                .handleStatusChange
-                                                        }
-                                                    />
-                                                );
-                                            }
-                                        )}
-                                    </tbody>
-                                </table>
+                                <div className="table-responsive">
+                                    <table className="table ">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">Name</th>
+                                                <th scope="col">Url Link</th>
+                                                <th scope="col">Description</th>
+                                                <th scope="col">Status</th>
+                                                <th scope="col">Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {this.state.surveys.map(
+                                                (link, index) => {
+                                                    return (
+                                                        <SurveyRow
+                                                            key={index}
+                                                            link={link}
+                                                            index={index}
+                                                            handleDelete={
+                                                                this
+                                                                    .handleDelete
+                                                            }
+                                                            handleStatusChange={
+                                                                this
+                                                                    .handleStatusChange
+                                                            }
+                                                        />
+                                                    );
+                                                }
+                                            )}
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>

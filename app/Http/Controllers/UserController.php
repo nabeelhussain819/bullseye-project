@@ -103,20 +103,22 @@ class UserController extends Controller
      */
     public function getUserDetails($id)
     {
-		  $claims = Claim::with('survey','status')
+		  $claims = Claim::with('survey','status', 'acceptedBy')
 		  				->where('user_id', $id)
 						->get()
 						->map(function($claim){
 							return [
 								'id' => $claim->id,
 								'survey_name' => $claim->survey->name,
-								'survey_url' => $claim->survey->url,
+								'is_accepted' => $claim->survey->url,
 								'survey_description' => $claim->survey->description,
-								'status_of_claim' => $claim->status->name,
-								'approved_by' => $claim->acceptedBy->name
+								'status' => $claim->status_id,
+                                'status_of_claim' => $claim->status->name,
+                                'created_at' => $claim->created_at->format('d/M/Y'),
+								'approved_by' => $claim->acceptedBy->name ?? '-'
 							];
 						});
-
+                        
         return $claims;
     }
 
