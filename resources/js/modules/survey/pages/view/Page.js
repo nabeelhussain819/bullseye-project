@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 
 import ClaimRow from "./components/ClaimRow";
 import ClaimService from "../../../../services/API/ClaimService";
+import Message from "../../../../common/ui/Message";
 
 class Page extends Component {
     static displayName = "ClaimPage";
@@ -15,12 +16,15 @@ class Page extends Component {
 
         this.state = {
             claims: [],
+            id: this.props.match.params.id,
         };
     }
 
     async componentDidMount() {
-        const id = this.props.match.params.id;
+        this.getClaims(this.state.id);
+    }
 
+    getClaims = async (id) => {
         await ClaimService.single(id)
             .then(({ data }) => {
                 this.setState({
@@ -30,7 +34,7 @@ class Page extends Component {
             .catch((e) => {
                 console.log(e);
             });
-    }
+    };
 
     message = (status, text, heading, variant) => {
         this.setState(
@@ -56,7 +60,7 @@ class Page extends Component {
     handleReject = async (id, status) => {
         await ClaimService.update({ id: id, status: status })
             .then(({ data }) => {
-                this.getAllClaims();
+                this.getClaims(this.state.id);
                 this.message(true, "Rejected Claim", "", "alert alert-success");
             })
             .catch(() => {});
@@ -65,7 +69,7 @@ class Page extends Component {
     handleAccept = async (id, status) => {
         await ClaimService.update({ id: id, status: status })
             .then(({ data }) => {
-                this.getAllClaims();
+                this.getClaims(this.state.id);
                 this.message(true, "Accepted Claim", "", "alert alert-success");
             })
             .catch(() => {});
@@ -110,7 +114,7 @@ class Page extends Component {
                                                 <th scope="col">
                                                     Claim Status
                                                 </th>
-                                                {/* <th scope="col">Actions</th> */}
+                                                <th scope="col">Actions</th>
                                             </tr>
                                         </thead>
                                         <tbody>

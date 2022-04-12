@@ -56,84 +56,71 @@ class Page extends Component {
                 </Link>
                 <div className="card ">
                     <div className="card-header text-center">
-                        <h1>
-                            Consumer Detail
-                            <div className="card-body">
-                                <div className="table-responsive">
-                                    <table className="table table-striped">
-                                        <thead className="">
-                                            <tr>
-                                                <th>S No. </th>
-                                                <th>Name</th>
-                                                <th>Email</th>
-                                                <th>Cell Number Primary</th>
-                                                <th>Cell Number Secondary</th>
-                                                <th>Created At</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr style={{ fontSize: "1rem" }}>
-                                                <td>
-                                                    {this.state.consumer?.id}
-                                                </td>
-                                                <td>
-                                                    {this.state.consumer?.name}
-                                                </td>
-                                                <td>
-                                                    {this.state.consumer?.email}
-                                                </td>
-                                                <td>
-                                                    {
-                                                        this.state.consumer
-                                                            ?.cell_number_primary
-                                                    }
-                                                </td>
-                                                <td>
-                                                    {
-                                                        this.state.consumer
-                                                            ?.cell_number_secondary
-                                                    }
-                                                </td>
-                                                <td>
-                                                    {
-                                                        this.state.consumer
-                                                            ?.created_at
-                                                    }
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </h1>
+                        <h1>Consumer Detail</h1>
                     </div>
-                    <div className="card-body"></div>
+                    <div className="card-body">
+                        <div className="table-responsive">
+                            <table className="table table-striped">
+                                <thead className="">
+                                    <tr>
+                                        <th>S No. </th>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Cell Number Primary</th>
+                                        <th>Cell Number Secondary</th>
+                                        <th>Created At</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr style={{ fontSize: "1rem" }}>
+                                        <td>{this.state.consumer?.id}</td>
+                                        <td>{this.state.consumer?.name}</td>
+                                        <td>{this.state.consumer?.email}</td>
+                                        <td>
+                                            {
+                                                this.state.consumer
+                                                    ?.cell_number_primary
+                                            }
+                                        </td>
+                                        <td>
+                                            {
+                                                this.state.consumer
+                                                    ?.cell_number_secondary
+                                            }
+                                        </td>
+                                        <td>
+                                            {this.state.consumer?.created_at}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
                 <div className="card mt-2">
                     <div className="card-header text-center">
-                        <h1>
+                        <h1 style={{ textTransform: "uppercase" }}>
                             {this.state.consumer?.name} Claims
-                            <div className="card-body">
-                                <div className="table-responsive">
-                                    <table className="table table-fixed">
-                                        <thead className="">
-                                            <tr>
-                                                <th>S No. </th>
-                                                <th>Survey Name</th>
-                                                <th>Survey Url</th>
-                                                <th>Survey Description</th>
-                                                <th>Status of Claim</th>
-                                                <th>Date</th>
-                                                <th>Approved By</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>{this.renderSurveys()}</tbody>
-                                    </table>
-                                </div>
-                            </div>
                         </h1>
                     </div>
-                    <div className="card-body"></div>
+                    <div className="card-body">
+                        <div className="table-responsive">
+                            <table className="table table-fixed">
+                                <thead className="">
+                                    <tr>
+                                        <th>S No. </th>
+                                        <th>Survey Name</th>
+                                        <th>Survey Url</th>
+                                        <th>Survey Description</th>
+                                        <th>Status of Claim</th>
+                                        <th>Date</th>
+                                        <th>Approved By</th>
+                                    </tr>
+                                </thead>
+                                <tbody>{this.renderSurveys()}</tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
         );

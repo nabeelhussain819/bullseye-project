@@ -110,7 +110,7 @@ class UserController extends Controller
 							return [
 								'id' => $claim->id,
 								'survey_name' => $claim->survey->name,
-								'is_accepted' => $claim->survey->url,
+								'survey_url' => $claim->survey->url,
 								'survey_description' => $claim->survey->description,
 								'status' => $claim->status_id,
                                 'status_of_claim' => $claim->status->name,

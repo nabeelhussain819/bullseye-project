@@ -56,7 +56,7 @@ class Claim extends Model
      */
     public function survey()
     {
-        return $this->belongsTo('App\Models\Survey');
+        return $this->belongsTo('App\Models\Survey', 'survey_id','id');
     }
 
     /**

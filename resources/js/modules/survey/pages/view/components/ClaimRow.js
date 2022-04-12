@@ -42,7 +42,7 @@ const ClaimRow = ({ claim, index, handleReject, handleAccept }) => {
             <td>{claim?.survey_url}</td>
             <td>{claim?.created_at}</td>
             <td>{badge(claim?.status_id)}</td>
-            {/* <td>
+            <td>
                 {claim.status_id == NEW_REQUEST_ID ||
                 claim.status_id == STATUS_CONFIRMED_ID ? (
                     <div style={{ display: "flex" }}>
@@ -67,7 +67,7 @@ const ClaimRow = ({ claim, index, handleReject, handleAccept }) => {
                 ) : (
                     "-"
                 )}
-            </td> */}
+            </td>
         </tr>
     );
 };
