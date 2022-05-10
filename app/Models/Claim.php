@@ -92,4 +92,29 @@ class Claim extends Model
     {
 
     }
+
+    public static function totalClaims()
+    {
+        return self::count();
+    }
+
+    public function scopePending($query)
+    {
+        return $query->where('status_id', Status::NEW_REQUEST_ID);
+    }
+
+    public function scopeCompleted($query)
+    {
+        return $query->where('status_id', Status::STATUS_CONFIRMED_ID);
+    }
+
+    public function scopeRejected($query)
+    {
+        return $query->where('status_id', Status::STATUS_DECLINED_ID);
+    }
+
+    public function scopeApproved($query)
+    {
+        return $query->where('status_id', Status::STATUS_APPROVED_ID);
+    }
 }

@@ -109,10 +109,11 @@ class ClaimController extends Controller
     {
         //return Claim::statistics(); make on real data
         return [
-            'total' => 3,
-            'pending' => 2,
-            'completed' => 3,
-            'rejected' => 2,
+            'total'          => Claim::totalClaims(),
+            'pending'        => Claim::Pending()->count(),
+            'completed'      => Claim::Completed()->count(),
+            'rejected'       => Claim::Rejected()->count(),
+            'approved'       => Claim::Approved()->count(),
             'current_survey' => Survey::currentWIthClaimDetail()
         ];
     }
