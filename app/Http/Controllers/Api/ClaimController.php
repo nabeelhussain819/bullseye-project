@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Claim;
+use App\Models\Status;
 use App\Models\Survey;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Http\Request;
@@ -109,11 +110,11 @@ class ClaimController extends Controller
     {
         //return Claim::statistics(); make on real data
         return [
-            'total'          => Claim::totalClaims(),
-            'pending'        => Claim::Pending()->count(),
-            'completed'      => Claim::Completed()->count(),
-            'rejected'       => Claim::Rejected()->count(),
-            'approved'       => Claim::Approved()->count(),
+            'total'          => Claim::where('user_id', auth()->id())->count() ?? 0,
+            'pending'        => Claim::where('user_id', auth()->id())->Stats(Status::NEW_REQUEST_ID)->count() ?? 0,
+            'completed'      => Claim::where('user_id', auth()->id())->Stats(Status::STATUS_CONFIRMED_ID)->count() ?? 0,
+            'rejected'       => Claim::where('user_id', auth()->id())->Stats(Status::STATUS_DECLINED_ID)->count() ?? 0,
+            'approved'       => Claim::where('user_id', auth()->id())->Stats(Status::STATUS_APPROVED_ID)->count() ?? 0,
             'current_survey' => Survey::currentWIthClaimDetail()
         ];
     }
