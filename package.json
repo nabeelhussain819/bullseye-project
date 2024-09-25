@@ -58,7 +58,7 @@
         "eslint-plugin-promise": "^4.2.1",
         "eslint-plugin-react": "^7.22.0",
         "eslint-webpack-plugin": "^2.4.3",
-        "laravel-mix": "^6.0.11",
+        "laravel-mix": "^6.0.43",
         "postcss": "^8.2.4",
         "redux-logger": "^3.0.6",
         "remove-files-webpack-plugin": "^1.4.4",
